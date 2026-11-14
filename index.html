@@ -10,29 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws",
-      authDomain: "askima-d585d.firebaseapp.com",
-      projectId: "askima-d585d",
-      storageBucket: "askima-d585d.firebasestorage.app",
-      messagingSenderId: "21373219933",
-      appId: "1:21373219933:web:8150366b0508e49fef49b4",
-      measurementId: "G-3CVGBVWRMH"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    try {
-      if (window.location.protocol.startsWith("http")) {
-        getAnalytics(app);
-      }
-    } catch (e) {}
-  </script>
-
   <style>
     :root {
       --bg-dark: #0d050a;
@@ -250,8 +227,8 @@
     }
 
     .btn-compact {
-      padding: 12px 26px;
-      font-size: 0.95rem;
+      padding: 12px 24px;
+      font-size: 0.92rem;
     }
 
     .btn-gold {
@@ -470,9 +447,9 @@
       padding: 0 4px;
     }
 
-    /* Ekran 5: Fotoğraf Tablosu & Süslü Çerçeveler */
+    /* Ekran 5: Bulut Senkronizasyon & Fotoğraf Tablosu */
     .gallery-header {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .gallery-title {
@@ -489,13 +466,13 @@
       opacity: 0.92;
     }
 
-    .bake-panel {
+    .sync-panel {
       background: rgba(38, 12, 26, 0.88);
-      border: 1px dashed rgba(255, 209, 102, 0.65);
+      border: 1px solid rgba(255, 117, 151, 0.45);
       border-radius: 20px;
       padding: 16px 20px;
       margin-bottom: 20px;
-      max-width: 560px;
+      max-width: 580px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -504,10 +481,17 @@
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
     }
 
-    .bake-info {
+    .sync-status {
       font-size: 0.88rem;
       color: #ffe5ec;
       line-height: 1.5;
+    }
+
+    .sync-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
 
     .photo-table {
@@ -582,7 +566,15 @@
       justify-content: center;
       gap: 6px;
       color: #ff9eb5;
-      font-size: 2.1rem;
+      padding: 12px;
+    }
+
+    .photo-placeholder-icon {
+      font-size: 2rem;
+    }
+
+    .photo-placeholder-text {
+      font-size: 0.78rem;
       opacity: 0.85;
     }
 
@@ -613,19 +605,21 @@
     #lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(5, 1, 4, 0.92);
+      background: rgba(5, 1, 4, 0.94);
       z-index: 999;
       display: none;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 16px;
       padding: 20px;
     }
 
     #lightbox.open { display: flex; }
 
     #lightbox img {
-      max-width: 94vw;
-      max-height: 86vh;
+      max-width: 92vw;
+      max-height: 76vh;
       border-radius: 18px;
       border: 2px solid #ff5c8a;
       box-shadow: 0 0 40px rgba(255, 42, 95, 0.6);
@@ -739,24 +733,24 @@
     </div>
   </section>
 
-  <!-- EKRAN 5: Kalpler ve Yıldızlarla Süslenmiş Fotoğraf Tablosu -->
+  <!-- EKRAN 5: Canlı Senkronize Fotoğraf Tablosu -->
   <section id="screen-5" class="screen screen-gallery">
     <div class="gallery-header">
       <h2 class="gallery-title">Bizim Güzel Anılarımız</h2>
       <p class="gallery-sub">✨ 15.02.2024’ten Sonsuzluğa ❤️ Her Karesi Aşk ✨</p>
     </div>
 
-    <div class="bake-panel" id="bake-panel">
-      <p class="bake-info" id="bake-status">
-        10 fotoğrafı bir kez seç, sistem onları doğrudan bu HTML kodunun içine kalıcı gömsün ve hazır dosyayı indirsin:
+    <div class="sync-panel" id="sync-panel">
+      <p class="sync-status" id="sync-status">
+        ☁️ Bulut bağlantısı kuruluyor... Eklediğin her fotoğraf tüm cihazlarda anında görünür.
       </p>
-      <label class="btn-love btn-compact" for="bake-photos-input">
-        📌 10 Fotoğrafı Seç ve Kodun İçine Göm
-      </label>
-      <input type="file" id="bake-photos-input" accept="image/*" multiple style="display:none" />
-      <button type="button" class="btn-love btn-gold btn-compact" id="btn-download-baked" style="display:none;">
-        💾 Fotoğraflar Gömülü Tek HTML İndir
-      </button>
+      <div class="sync-actions">
+        <label class="btn-love btn-compact" for="bulk-photos-input">
+          ☁️ Toplu Fotoğraf Yükle (Max 10)
+        </label>
+        <input type="file" id="bulk-photos-input" accept="image/*" multiple style="display:none" />
+        <input type="file" id="single-photo-input" accept="image/*" style="display:none" />
+      </div>
     </div>
 
     <table class="photo-table" id="photo-table">
@@ -767,7 +761,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Seninle Her An" />
               </div>
               <div class="frame-caption"><span>✨</span> Seninle Her An <span>❤️</span></div>
@@ -778,7 +775,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Gülüşün Dünyam" />
               </div>
               <div class="frame-caption"><span>✨</span> Gülüşün Dünyam <span>❤️</span></div>
@@ -792,7 +792,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="En Tatlı Hallerimiz" />
               </div>
               <div class="frame-caption"><span>✨</span> En Tatlı Hallerimiz <span>❤️</span></div>
@@ -803,7 +806,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Sana Bakarken" />
               </div>
               <div class="frame-caption"><span>✨</span> Sana Bakarken <span>❤️</span></div>
@@ -817,7 +823,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Siyah Beyaz Aşk" />
               </div>
               <div class="frame-caption"><span>✨</span> Siyah Beyaz Aşk <span>❤️</span></div>
@@ -828,7 +837,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Gece Işığım" />
               </div>
               <div class="frame-caption"><span>✨</span> Gece Işığım <span>❤️</span></div>
@@ -842,7 +854,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Çiçek Gibi Anımız" />
               </div>
               <div class="frame-caption"><span>✨</span> Çiçek Gibi Anımız <span>❤️</span></div>
@@ -853,7 +868,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Her Işıkta Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Her Işıkta Seninle <span>❤️</span></div>
@@ -867,7 +885,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="Kalbim Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Kalbim Seninle <span>❤️</span></div>
@@ -878,7 +899,10 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <div class="photo-placeholder">💖</div>
+                <div class="photo-placeholder">
+                  <span class="photo-placeholder-icon">💖</span>
+                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
+                </div>
                 <img alt="İyi Ki Benimlesin" />
               </div>
               <div class="frame-caption"><span>✨</span> İyi Ki Benimlesin <span>❤️</span></div>
@@ -889,295 +913,376 @@
     </table>
   </section>
 
-  <!-- Fotoğraf Büyütme Modalı -->
+  <!-- Fotoğraf Büyütme ve Değiştirme Modalı -->
   <div id="lightbox">
     <button type="button" id="lightbox-close">✕</button>
     <img id="lightbox-img" src="" alt="Anımız" />
+    <button type="button" class="btn-love btn-gold btn-compact" id="btn-replace-photo">
+      🔄 Bu Fotoğrafı Değiştir
+    </button>
   </div>
 
-  <script>
-    (function () {
-      const STORAGE_KEY = "askima_embedded_photos_v1";
-      let activeTimer = null;
+  <!-- Firebase & Uygulama Mantığı -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      setDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-      function initAmbientParticles() {
-        const container = document.getElementById("ambient-bg");
-        if (!container) return;
-        container.innerHTML = "";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws",
+      authDomain: "askima-d585d.firebaseapp.com",
+      projectId: "askima-d585d",
+      storageBucket: "askima-d585d.firebasestorage.app",
+      messagingSenderId: "21373219933",
+      appId: "1:21373219933:web:8150366b0508e49fef49b4",
+      measurementId: "G-3CVGBVWRMH"
+    };
 
-        const symbols = ["❤️", "✨", "💖", "⭐", "💕", "🌟"];
-        for (let i = 0; i < 16; i++) {
-          const el = document.createElement("span");
-          el.className = "floating-particle";
-          el.textContent = symbols[i % symbols.length];
-          el.style.left = ((i * 6.2) % 96 + 2) + "%";
-          el.style.fontSize = (14 + (i % 4) * 4) + "px";
-          el.style.animationDuration = (9 + (i % 5) * 2) + "s";
-          el.style.animationDelay = (i * 0.55) + "s";
-          container.appendChild(el);
-        }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    try {
+      if (window.location.protocol.startsWith("http")) {
+        getAnalytics(app);
+      }
+    } catch (e) {}
+
+    const COLLECTION_NAME = "askima_photos";
+    const CACHE_KEY = "askima_cloud_cache_v1";
+    let activeTimer = null;
+    let selectedSlotForSingleUpload = 0;
+    let photoMap = {};
+
+    // Arka Plan Kalp ve Yıldız Parçacıkları
+    function initAmbientParticles() {
+      const container = document.getElementById("ambient-bg");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const symbols = ["❤️", "✨", "💖", "⭐", "💕", "🌟"];
+      for (let i = 0; i < 16; i++) {
+        const el = document.createElement("span");
+        el.className = "floating-particle";
+        el.textContent = symbols[i % symbols.length];
+        el.style.left = ((i * 6.2) % 96 + 2) + "%";
+        el.style.fontSize = (14 + (i % 4) * 4) + "px";
+        el.style.animationDuration = (9 + (i % 5) * 2) + "s";
+        el.style.animationDelay = (i * 0.55) + "s";
+        container.appendChild(el);
+      }
+    }
+
+    // Ekran Geçişi
+    function goToScreen(num) {
+      if (activeTimer) {
+        clearInterval(activeTimer);
+        activeTimer = null;
       }
 
-      function goToScreen(num) {
-        if (activeTimer) {
-          clearInterval(activeTimer);
-          activeTimer = null;
-        }
+      document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+      const target = document.getElementById("screen-" + num);
+      if (target) target.classList.add("active");
 
-        document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
-        const target = document.getElementById("screen-" + num);
-        if (target) target.classList.add("active");
+      try {
+        window.scrollTo(0, 0);
+      } catch (e) {}
 
-        try {
-          window.scrollTo(0, 0);
-        } catch (e) {}
+      if (num === 2) runScreen2Sequence();
+    }
 
-        if (num === 2) runScreen2Sequence();
-      }
+    // Geri Sayım Yöneticisi
+    function runCountdown({ seconds, btnId, numId, boxId, nextScreen }) {
+      const btn = document.getElementById(btnId);
+      const numEl = document.getElementById(numId);
+      const boxEl = boxId ? document.getElementById(boxId) : null;
 
-      function runCountdown({ seconds, btnId, numId, boxId, nextScreen }) {
-        const btn = document.getElementById(btnId);
-        const numEl = document.getElementById(numId);
-        const boxEl = boxId ? document.getElementById(boxId) : null;
+      if (!btn || btn.disabled) return;
+      btn.disabled = true;
+      btn.textContent = "Sayılıyor...";
 
-        if (!btn || btn.disabled) return;
-        btn.disabled = true;
-        btn.textContent = "Sayılıyor...";
+      let remaining = seconds;
+      numEl.textContent = remaining;
 
-        let remaining = seconds;
+      activeTimer = setInterval(() => {
+        remaining--;
         numEl.textContent = remaining;
 
-        activeTimer = setInterval(() => {
-          remaining--;
-          numEl.textContent = remaining;
+        if (boxEl && boxEl.classList.contains("timer-display")) {
+          boxEl.classList.remove("tick");
+          void boxEl.offsetWidth;
+          boxEl.classList.add("tick");
+        }
 
-          if (boxEl && boxEl.classList.contains("timer-display")) {
-            boxEl.classList.remove("tick");
-            void boxEl.offsetWidth;
-            boxEl.classList.add("tick");
-          }
+        if (remaining <= 0) {
+          clearInterval(activeTimer);
+          activeTimer = null;
+          setTimeout(() => goToScreen(nextScreen), 400);
+        }
+      }, 1000);
+    }
 
-          if (remaining <= 0) {
-            clearInterval(activeTimer);
-            activeTimer = null;
-            setTimeout(() => goToScreen(nextScreen), 400);
-          }
-        }, 1000);
-      }
+    // Ekran 2 Animasyonu
+    function runScreen2Sequence() {
+      const words = ["SENİ", "ÇOK", "SEVİYORUM"];
+      const phraseContainer = document.getElementById("love-phrase");
+      const heart = document.getElementById("falling-heart");
+      const aura = document.getElementById("heart-aura");
+      const controls = document.getElementById("step2-controls");
 
-      function runScreen2Sequence() {
-        const words = ["SENİ", "ÇOK", "SEVİYORUM"];
-        const phraseContainer = document.getElementById("love-phrase");
-        const heart = document.getElementById("falling-heart");
-        const aura = document.getElementById("heart-aura");
-        const controls = document.getElementById("step2-controls");
+      phraseContainer.innerHTML = "";
+      phraseContainer.classList.remove("complete");
+      heart.classList.remove("drop-in");
+      aura.classList.remove("active");
+      controls.classList.remove("visible");
 
-        phraseContainer.innerHTML = "";
-        phraseContainer.classList.remove("complete");
-        heart.classList.remove("drop-in");
-        aura.classList.remove("active");
-        controls.classList.remove("visible");
+      const spans = [];
+      words.forEach((word) => {
+        const row = document.createElement("div");
+        row.className = "love-word-row";
 
-        const spans = [];
-        words.forEach((word) => {
-          const row = document.createElement("div");
-          row.className = "love-word-row";
-
-          word.split("").forEach((char) => {
-            const span = document.createElement("span");
-            span.className = "love-char";
-            span.textContent = char;
-            row.appendChild(span);
-            spans.push(span);
-          });
-
-          phraseContainer.appendChild(row);
+        word.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.className = "love-char";
+          span.textContent = char;
+          row.appendChild(span);
+          spans.push(span);
         });
 
-        spans.forEach((el, index) => {
-          setTimeout(() => el.classList.add("lit"), index * 140);
-        });
+        phraseContainer.appendChild(row);
+      });
 
-        const totalTextDuration = spans.length * 140 + 450;
+      spans.forEach((el, index) => {
+        setTimeout(() => el.classList.add("lit"), index * 140);
+      });
 
-        setTimeout(() => phraseContainer.classList.add("complete"), totalTextDuration);
-        setTimeout(() => {
-          heart.classList.add("drop-in");
-          aura.classList.add("active");
-        }, totalTextDuration + 250);
-        setTimeout(() => controls.classList.add("visible"), totalTextDuration + 1250);
-      }
+      const totalTextDuration = spans.length * 140 + 450;
 
-      function applyPhotosToFrames(dataUrls) {
-        const frames = document.querySelectorAll(".ornate-frame");
-        frames.forEach((frame, i) => {
-          const wrapper = frame.querySelector(".photo-wrapper");
-          const img = frame.querySelector("img");
-          if (dataUrls[i] && wrapper && img) {
-            img.src = dataUrls[i];
-            wrapper.classList.add("has-img");
-          }
-        });
-      }
+      setTimeout(() => phraseContainer.classList.add("complete"), totalTextDuration);
+      setTimeout(() => {
+        heart.classList.add("drop-in");
+        aura.classList.add("active");
+      }, totalTextDuration + 250);
+      setTimeout(() => controls.classList.add("visible"), totalTextDuration + 1250);
+    }
 
-      function compressImageFile(file) {
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onerror = () => resolve("");
-          reader.onload = (e) => {
-            const img = new Image();
-            img.onerror = () => resolve(e.target.result);
-            img.onload = () => {
-              const maxSide = 880;
-              let w = img.width;
-              let h = img.height;
+    // Fotoğrafları Çerçevelere Yerleştir
+    function renderPhotosFromMap(map) {
+      document.querySelectorAll(".ornate-frame").forEach((frame) => {
+        const slot = frame.getAttribute("data-slot");
+        const wrapper = frame.querySelector(".photo-wrapper");
+        const img = frame.querySelector("img");
+        const url = map[slot];
 
-              if (w > maxSide || h > maxSide) {
-                if (w > h) {
-                  h = Math.round((h * maxSide) / w);
-                  w = maxSide;
-                } else {
-                  w = Math.round((w * maxSide) / h);
-                  h = maxSide;
-                }
+        if (url && wrapper && img) {
+          img.src = url;
+          wrapper.classList.add("has-img");
+        }
+      });
+    }
+
+    // Fotoğrafı Firestore Limitine Uygun Boyuta Sıkıştır (Max ~70-90 KB)
+    function compressImageFile(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onerror = () => resolve("");
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onerror = () => resolve("");
+          img.onload = () => {
+            const maxSide = 720;
+            let w = img.width;
+            let h = img.height;
+
+            if (w > maxSide || h > maxSide) {
+              if (w > h) {
+                h = Math.round((h * maxSide) / w);
+                w = maxSide;
+              } else {
+                w = Math.round((w * maxSide) / h);
+                h = maxSide;
               }
+            }
 
-              const canvas = document.createElement("canvas");
-              canvas.width = w;
-              canvas.height = h;
-              canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-              resolve(canvas.toDataURL("image/jpeg", 0.82));
-            };
-            img.src = e.target.result;
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL("image/jpeg", 0.72));
           };
-          reader.readAsDataURL(file);
-        });
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Tek Bir Slotu Firebase Firestore'a Kaydet
+    async function uploadSlotToCloud(slotIndex, file) {
+      const statusEl = document.getElementById("sync-status");
+      statusEl.textContent = "⏳ Fotoğraf buluta yükleniyor...";
+
+      const compressedDataUrl = await compressImageFile(file);
+      if (!compressedDataUrl) {
+        statusEl.textContent = "❌ Fotoğraf okunamadı, lütfen başka bir görsel deneyin.";
+        return;
       }
 
-      function downloadSelfContainedHtml() {
-        const clone = document.documentElement.cloneNode(true);
+      try {
+        await setDoc(doc(db, COLLECTION_NAME, "slot_" + slotIndex), {
+          url: compressedDataUrl,
+          updatedAt: Date.now()
+        });
+        statusEl.textContent = "✅ Fotoğraf buluta kaydedildi! Tüm cihazlarda anında güncellendi.";
+      } catch (err) {
+        handleFirestoreError(err);
+      }
+    }
 
-        const panel = clone.querySelector("#bake-panel");
-        if (panel) panel.remove();
+    // Toplu Fotoğraf Yükleme (En Fazla 10 Fotoğraf)
+    async function handleBulkUpload(event) {
+      const files = Array.from(event.target.files || []).slice(0, 10);
+      event.target.value = "";
+      if (!files.length) return;
 
-        const liveFrames = document.querySelectorAll(".ornate-frame");
-        const cloneFrames = clone.querySelectorAll(".ornate-frame");
+      const statusEl = document.getElementById("sync-status");
+      statusEl.textContent = `⏳ ${files.length} fotoğraf sıkıştırılıp buluta gönderiliyor...`;
 
-        liveFrames.forEach((liveFrame, i) => {
-          const liveImg = liveFrame.querySelector("img");
-          const cloneFrame = cloneFrames[i];
-          if (!cloneFrame || !liveImg || !liveImg.src.startsWith("data:image")) return;
-
-          const cloneImg = cloneFrame.querySelector("img");
-          const cloneWrapper = cloneFrame.querySelector(".photo-wrapper");
-          const clonePlaceholder = cloneFrame.querySelector(".photo-placeholder");
-
-          if (cloneImg) {
-            cloneImg.setAttribute("src", liveImg.src);
-            cloneImg.style.display = "block";
-          }
-          if (cloneWrapper) cloneWrapper.classList.add("has-img");
-          if (clonePlaceholder) clonePlaceholder.remove();
+      try {
+        const compressedList = await Promise.all(files.map(compressImageFile));
+        const tasks = compressedList.map((url, idx) => {
+          if (!url) return Promise.resolve();
+          return setDoc(doc(db, COLLECTION_NAME, "slot_" + idx), {
+            url,
+            updatedAt: Date.now()
+          });
         });
 
-        clone.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
-        const s1 = clone.querySelector("#screen-1");
-        if (s1) s1.classList.add("active");
-
-        const htmlOutput = "<!DOCTYPE html>\n" + clone.outerHTML;
-        const blob = new Blob([htmlOutput], { type: "text/html;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Askima_15_02_2024.html";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        await Promise.all(tasks);
+        statusEl.textContent = `✅ ${files.length} fotoğraf buluta aktarıldı! Diğer cihazlarda anında görünüyor.`;
+      } catch (err) {
+        handleFirestoreError(err);
       }
+    }
 
-      function handleBakeSelection(event) {
-        const files = event.target.files;
-        if (!files || !files.length) return;
-
-        const statusEl = document.getElementById("bake-status");
-        const dlBtn = document.getElementById("btn-download-baked");
-        statusEl.textContent = "Fotoğraflar işleniyor ve HTML içine gömülüyor...";
-
-        const limitedFiles = Array.from(files).slice(0, 10);
-        Promise.all(limitedFiles.map(compressImageFile)).then((results) => {
-          const dataUrls = results.filter(Boolean);
-          applyPhotosToFrames(dataUrls);
-
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataUrls));
-          } catch (e) {}
-
-          statusEl.innerHTML =
-            "✅ <strong>" +
-            dataUrls.length +
-            " fotoğraf</strong> kodun içine gömüldü! Aşağıdaki butondan hazır tek dosyayı indirip sevgiline gönderebilirsin:";
-          dlBtn.style.display = "inline-flex";
-          downloadSelfContainedHtml();
-        });
+    function handleFirestoreError(err) {
+      const statusEl = document.getElementById("sync-status");
+      if (err && err.code === "permission-denied") {
+        statusEl.innerHTML =
+          "⚠️ <strong>Firebase izni kapalı:</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp yayınlayın.";
+      } else {
+        statusEl.textContent = "⚠️ Bulut bağlantı hatası: " + (err?.message || "Bilinmeyen hata");
       }
+    }
 
-      function bindPhotoFrames() {
-        document.querySelectorAll(".ornate-frame").forEach((frame) => {
-          frame.addEventListener("click", () => {
-            const img = frame.querySelector("img");
-            if (img && img.src.startsWith("data:image")) {
-              document.getElementById("lightbox-img").src = img.src;
-              document.getElementById("lightbox").classList.add("open");
+    // Gerçek Zamanlı Firebase Dinleyicisi (Tüm Cihazlar Anlık Senkron)
+    function startRealtimePhotoSync() {
+      const statusEl = document.getElementById("sync-status");
+
+      onSnapshot(
+        collection(db, COLLECTION_NAME),
+        (snapshot) => {
+          let count = 0;
+          snapshot.forEach((docSnap) => {
+            const id = docSnap.id; // "slot_0" .. "slot_9"
+            if (id.startsWith("slot_")) {
+              const slotIndex = id.replace("slot_", "");
+              const data = docSnap.data();
+              if (data && data.url) {
+                photoMap[slotIndex] = data.url;
+                count++;
+              }
             }
           });
-        });
-      }
 
-      function closeLightbox() {
-        document.getElementById("lightbox").classList.remove("open");
-      }
+          renderPhotosFromMap(photoMap);
 
-      function restoreSavedPhotos() {
-        try {
-          const saved = localStorage.getItem(STORAGE_KEY);
-          if (!saved) return;
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length) {
-            applyPhotosToFrames(parsed);
-            const dlBtn = document.getElementById("btn-download-baked");
-            if (dlBtn) dlBtn.style.display = "inline-flex";
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify(photoMap));
+          } catch (e) {}
+
+          statusEl.textContent =
+            count > 0
+              ? `🟢 Canlı Bulut Aktif (${count}/10 fotoğraf tüm cihazlarda senkronize)`
+              : "🟢 Canlı Bulut Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle";
+        },
+        (err) => {
+          handleFirestoreError(err);
+        }
+      );
+    }
+
+    // Çerçeve Tıklama Etkileşimi (Boşsa Ekle, Doluysa Büyüt/Değiştir)
+    function bindPhotoFrames() {
+      const singleInput = document.getElementById("single-photo-input");
+
+      document.querySelectorAll(".ornate-frame").forEach((frame) => {
+        frame.addEventListener("click", () => {
+          const slot = frame.getAttribute("data-slot");
+          selectedSlotForSingleUpload = slot;
+
+          if (photoMap[slot]) {
+            document.getElementById("lightbox-img").src = photoMap[slot];
+            document.getElementById("lightbox").classList.add("open");
+          } else {
+            singleInput.click();
           }
-        } catch (e) {}
-      }
+        });
+      });
 
-      // Event Listeners
-      document.getElementById("btn-start-15").addEventListener("click", () =>
-        runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
-      );
-      document.getElementById("btn-next-2").addEventListener("click", () =>
-        runCountdown({ seconds: 2, btnId: "btn-next-2", numId: "timer-num-2", boxId: "timer-box-2", nextScreen: 3 })
-      );
-      document.getElementById("btn-start-24").addEventListener("click", () =>
-        runCountdown({ seconds: 24, btnId: "btn-start-24", numId: "timer-num-3", boxId: "timer-box-3", nextScreen: 4 })
-      );
-      document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
+      singleInput.addEventListener("change", async (e) => {
+        const file = e.target.files && e.target.files[0];
+        e.target.value = "";
+        if (!file) return;
+        await uploadSlotToCloud(selectedSlotForSingleUpload, file);
+      });
 
-      const bakeInput = document.getElementById("bake-photos-input");
-      if (bakeInput) bakeInput.addEventListener("change", handleBakeSelection);
+      document.getElementById("btn-replace-photo").addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeLightbox();
+        singleInput.click();
+      });
+    }
 
-      const dlBtn = document.getElementById("btn-download-baked");
-      if (dlBtn) dlBtn.addEventListener("click", downloadSelfContainedHtml);
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("open");
+    }
 
-      document.getElementById("lightbox").addEventListener("click", closeLightbox);
-      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+    // Hızlı Açılış İçin Yerel Önbelleği Yükle
+    function loadCachedPhotosFirst() {
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          photoMap = JSON.parse(cached) || {};
+          renderPhotosFromMap(photoMap);
+        }
+      } catch (e) {}
+    }
 
-      bindPhotoFrames();
-      restoreSavedPhotos();
-      initAmbientParticles();
-    })();
+    // Başlat
+    document.getElementById("btn-start-15").addEventListener("click", () =>
+      runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
+    );
+    document.getElementById("btn-next-2").addEventListener("click", () =>
+      runCountdown({ seconds: 2, btnId: "btn-next-2", numId: "timer-num-2", boxId: "timer-box-2", nextScreen: 3 })
+    );
+    document.getElementById("btn-start-24").addEventListener("click", () =>
+      runCountdown({ seconds: 24, btnId: "btn-start-24", numId: "timer-num-3", boxId: "timer-box-3", nextScreen: 4 })
+    );
+    document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
+
+    document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
+    document.getElementById("lightbox").addEventListener("click", closeLightbox);
+    document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+
+    bindPhotoFrames();
+    loadCachedPhotosFirst();
+    startRealtimePhotoSync();
+    initAmbientParticles();
   </script>
 </body>
 </html>
