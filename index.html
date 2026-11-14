@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Aşkım’a ❤️ 15.02.2024</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #0d050a;
+      --card-bg: rgba(28, 10, 20, 0.78);
+      --border-glow: rgba(255, 65, 108, 0.48);
+      --primary: #ff2a5f;
+      --primary-light: #ff7597;
+      --gold: #ffd166;
+      --text-main: #fff5f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #2b0918 0%, #12040b 55%, #070205 100%);
+      color: var(--text-main);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Arka Plan Uçuşan Kalpler ve Yıldızlar */
+    #ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-particle {
+      position: absolute;
+      bottom: -40px;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: floatUp linear infinite;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.75) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.75;
+      }
+      85% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translate3d(0, -108vh, 0) scale(1.15) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* Ekran Yapısı */
+    .screen {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 960px;
+      min-height: 100vh;
+      padding: 28px 18px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: screenFadeIn 0.65s ease forwards;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes screenFadeIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    /* Glassmorphism Kart */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glow);
+      border-radius: 28px;
+      padding: 38px 26px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 32px rgba(255, 42, 95, 0.24),
+        inset 0 0 20px rgba(255, 117, 151, 0.08);
+    }
+
+    /* Ekran 1 Başlık */
+    .title-askim {
+      font-family: 'Dancing Script', Georgia, cursive;
+      font-size: clamp(3.5rem, 10vw, 4.9rem);
+      color: #ff4d79;
+      text-shadow:
+        0 0 15px rgba(255, 42, 95, 0.85),
+        0 0 35px rgba(255, 42, 95, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #ffd6e0;
+      opacity: 0.92;
+      margin-bottom: 26px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Canlı Geri Sayım Göstergesi */
+    .timer-display {
+      width: 124px;
+      height: 124px;
+      margin: 0 auto 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 42, 95, 0.24) 0%, rgba(20, 6, 14, 0.92) 75%);
+      border: 3px solid #ff2a5f;
+      box-shadow:
+        0 0 25px rgba(255, 42, 95, 0.55),
+        inset 0 0 18px rgba(255, 42, 95, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .timer-display.tick {
+      transform: scale(1.07);
+    }
+
+    .timer-number {
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      text-shadow: 0 0 14px rgba(255, 77, 121, 0.9);
+    }
+
+    .timer-unit {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #ff9eb5;
+      margin-top: 4px;
+    }
+
+    /* Butonlar */
+    .btn-love {
+      background: linear-gradient(135deg, #ff1e56 0%, #ff5c8a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 34px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow:
+        0 8px 25px rgba(255, 30, 86, 0.55),
+        0 0 18px rgba(255, 92, 138, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn-love:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 12px 32px rgba(255, 30, 86, 0.75),
+        0 0 26px rgba(255, 92, 138, 0.65);
+    }
+
+    .btn-love:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .btn-love:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #ffd166 100%);
+      color: #1f0712;
+      box-shadow: 0 8px 24px rgba(255, 209, 102, 0.45);
+    }
+
+    .helper-note {
+      margin-top: 16px;
+      font-size: 0.98rem;
+      color: #ffccd5;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    /* Ekran 2: Üstten Aşağıya Sıralı SENİ / ÇOK / SEVİYORUM */
+    .love-phrase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      min-height: 185px;
+    }
+
+    .love-word-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(2.1rem, 7.2vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .love-char {
+      display: inline-block;
+      opacity: 0;
+      color: #fff;
+      transform: scale(0.6);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .love-char.lit {
+      opacity: 1;
+      transform: scale(1);
+      animation: charFlash 0.65s ease-in-out;
+      text-shadow:
+        0 0 10px #fff,
+        0 0 22px #ff2a5f,
+        0 0 42px #ff2a5f,
+        0 0 60px #ff0040;
+    }
+
+    .love-phrase.complete .love-char.lit {
+      animation: steadyNeonPulse 1.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes charFlash {
+      0% {
+        opacity: 0.2;
+        transform: scale(1.35);
+        color: #ffd166;
+      }
+      35% {
+        opacity: 1;
+        transform: scale(1.1);
+        color: #ffffff;
+      }
+      60% {
+        opacity: 0.35;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes steadyNeonPulse {
+      from {
+        opacity: 0.92;
+        transform: scale(1);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.03);
+      }
+    }
+
+    /* Yukarıdan Aşağıya İnen Parlayan Kırmızı Kalp */
+    .heart-stage {
+      position: relative;
+      height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 4px 0 16px;
+      overflow: visible;
+    }
+
+    .heart-aura {
+      position: absolute;
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 23, 68, 0.7) 0%, rgba(255, 0, 55, 0.25) 45%, rgba(255, 0, 55, 0) 72%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heart-aura.active {
+      animation: auraGlow 1.3s ease-in-out infinite;
+    }
+
+    @keyframes auraGlow {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(0.95);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.22);
+      }
+    }
+
+    .glowing-heart {
+      position: relative;
+      z-index: 2;
+      width: 122px;
+      height: 122px;
+      opacity: 0;
+      transform: translate3d(0, -260px, 0) scale(0.4);
+      filter: drop-shadow(0 0 18px rgba(255, 0, 45, 0.95));
+      will-change: transform, opacity;
+    }
+
+    .glowing-heart.drop-in {
+      animation:
+        heartDropDown 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        heartBeatGlow 1.3s ease-in-out 1.15s infinite;
+    }
+
+    @keyframes heartDropDown {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -260px, 0) scale(0.4);
+      }
+      70% {
+        opacity: 1;
+        transform: translate3d(0, 12px, 0) scale(1.08);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes heartBeatGlow {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.13);
+      }
+    }
+
+    .step2-controls {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, 14px, 0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .step2-controls.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .mini-counter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 42, 95, 0.18);
+      border: 1px solid rgba(255, 117, 151, 0.5);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(255, 42, 95, 0.3);
+    }
+
+    /* Ekran 4: Tarih Mesajı Kartı */
+    .story-card {
+      max-width: 600px;
+      padding: 40px 28px;
+    }
+
+    .story-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: block;
+      animation: heartBeatGlow 1.6s infinite;
+    }
+
+    .story-text {
+      font-size: clamp(1.08rem, 3.4vw, 1.26rem);
+      line-height: 1.85;
+      color: #fff0f3;
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    .date-highlight {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 1.32em;
+      color: var(--gold);
+      text-shadow: 0 0 16px rgba(255, 209, 102, 0.75);
+      padding: 0 4px;
+    }
+
+    /* Ekran 5: Fotoğraf Tablosu & Süslü Çerçeveler */
+    .gallery-header {
+      margin-bottom: 20px;
+    }
+
+    .gallery-title {
+      font-family: 'Dancing Script', Georgia, cursive;
+      font-size: clamp(2.5rem, 8vw, 3.8rem);
+      color: #ff5c8a;
+      text-shadow: 0 0 22px rgba(255, 42, 95, 0.75);
+      margin-bottom: 6px;
+    }
+
+    .gallery-sub {
+      color: #ffd6e0;
+      font-size: 0.98rem;
+      opacity: 0.92;
+    }
+
+    /* Tek Seferlik Kalıcı Gömme Paneli (Dışa aktarılan dosyada otomatik silinir) */
+    .bake-panel {
+      background: rgba(38, 12, 26, 0.88);
+      border: 1px dashed rgba(255, 209, 102, 0.65);
+      border-radius: 20px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      max-width: 560px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .bake-info {
+      font-size: 0.88rem;
+      color: #ffe5ec;
+      line-height: 1.5;
+    }
+
+    .photo-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 18px;
+      table-layout: fixed;
+    }
+
+    .photo-cell {
+      vertical-align: top;
+      width: 50%;
+    }
+
+    .ornate-frame {
+      position: relative;
+      background: linear-gradient(145deg, rgba(45, 14, 30, 0.92), rgba(20, 6, 14, 0.96));
+      border: 2px solid rgba(255, 117, 151, 0.65);
+      border-radius: 22px;
+      padding: 12px 12px 16px;
+      box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.65),
+        0 0 22px rgba(255, 42, 95, 0.3),
+        inset 0 0 14px rgba(255, 209, 102, 0.14);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    .ornate-frame:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.75),
+        0 0 32px rgba(255, 42, 95, 0.6),
+        inset 0 0 18px rgba(255, 209, 102, 0.25);
+    }
+
+    /* Çerçeve Köşe Kalpleri ve Yıldızları */
+    .deco-tl, .deco-tr, .deco-bl, .deco-br {
+      position: absolute;
+      font-size: 1.25rem;
+      z-index: 3;
+      animation: twinkle 2.2s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+
+    .deco-tl { top: -11px; left: -10px; }
+    .deco-tr { top: -11px; right: -10px; animation-delay: 0.5s; }
+    .deco-bl { bottom: -11px; left: -10px; animation-delay: 1s; }
+    .deco-br { bottom: -11px; right: -10px; animation-delay: 1.5s; }
+
+    @keyframes twinkle {
+      0% { transform: scale(0.9) rotate(-8deg); opacity: 0.8; }
+      100% { transform: scale(1.22) rotate(8deg); opacity: 1; }
+    }
+
+    .photo-wrapper {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 14px;
+      overflow: hidden;
+      background: radial-gradient(circle, #2d0d1d 0%, #14050d 100%);
+      position: relative;
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #ff9eb5;
+      font-size: 2.1rem;
+      opacity: 0.85;
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-wrapper.has-img .photo-placeholder {
+      display: none;
+    }
+
+    .photo-wrapper.has-img img {
+      display: block;
+    }
+
+    .ornate-frame:hover .photo-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .frame-caption {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #ffd6e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Tam Ekran Fotoğraf Önizleme (Lightbox) */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 1, 4, 0.92);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 94vw;
+      max-height: 86vh;
+      border-radius: 18px;
+      border: 2px solid #ff5c8a;
+      box-shadow: 0 0 40px rgba(255, 42, 95, 0.6);
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: rgba(255, 42, 95, 0.85);
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* Mobil Uyum */
+    @media (max-width: 640px) {
+      .photo-table {
+        border-spacing: 10px;
+      }
+      .ornate-frame {
+        padding: 8px 8px 12px;
+        border-radius: 16px;
+      }
+      .deco-tl, .deco-tr, .deco-bl, .deco-br {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Uçuşan Kalp ve Yıldız Arka Planı -->
+  <div id="ambient-bg"></div>
+
+  <!-- EKRAN 1: Aşkım'a & 15 Saniye Geri Sayım -->
+  <section id="screen-1" class="screen active">
+    <div class="glass-card">
+      <h1 class="title-askim">Aşkım’a</h1>
+      <p class="subtitle">Birkaç saniye bekleyin...</p>
+
+      <div class="timer-display" id="timer-box-1">
+        <span class="timer-number" id="timer-num-1">15</span>
+        <span class="timer-unit">Saniye</span>
+      </div>
+
+      <button type="button" class="btn-love" id="btn-start-15">
+        ❤️ Başla 15 Saniye
+      </button>
+    </div>
+  </section>
+
+  <!-- EKRAN 2: Üstten Aşağıya SENİ ÇOK SEVİYORUM + Parlayan Kırmızı Kalp + 2 Saniye -->
+  <section id="screen-2" class="screen">
+    <div class="glass-card" style="max-width: 580px;">
+      <div class="love-phrase" id="love-phrase"></div>
+
+      <div class="heart-stage">
+        <div class="heart-aura" id="heart-aura"></div>
+        <svg id="falling-heart" class="glowing-heart" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="redHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff1a4b" />
+              <stop offset="50%" stop-color="#e60026" />
+              <stop offset="100%" stop-color="#99001a" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#redHeartGrad)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+
+      <div class="step2-controls" id="step2-controls">
+        <div class="mini-counter-badge" id="timer-box-2">
+          ⏳ Sayaç: <span id="timer-num-2">2</span> saniye
+        </div>
+        <button type="button" class="btn-love" id="btn-next-2">
+          Devam Et 2 Saniye ✨
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EKRAN 3: 24 Saniye Say & Sabrına Değecek Aşkım -->
+  <section id="screen-3" class="screen">
+    <div class="glass-card">
+      <div class="timer-display" id="timer-box-3">
+        <span class="timer-number" id="timer-num-3">24</span>
+        <span class="timer-unit">Saniye</span>
+      </div>
+
+      <button type="button" class="btn-love" id="btn-start-24">
+        ⏱️ 24 Saniye Say
+      </button>
+
+      <p class="helper-note">Sabrına değecek aşkım ❤️</p>
+    </div>
+  </section>
+
+  <!-- EKRAN 4: 15.02.2024 Sürpriz Mesajı -->
+  <section id="screen-4" class="screen">
+    <div class="glass-card story-card">
+      <span class="story-icon">💖✨</span>
+      <p class="story-text">
+        “Farkettin mi süre ilk önce <strong>15 saniyeydi</strong> sonra <strong>2 saniye</strong> sonra <strong>24</strong>, yani
+        <span class="date-highlight">15.02.2024</span>.
+        Evet bizim tarihimiz. Seni her geçen saniye daha çok seviyorum aşkım. İyi ki varsın, iyi ki benimlesin!”
+      </p>
+
+      <button type="button" class="btn-love" id="btn-to-gallery">
+        Devam Et ❤️
+      </button>
+    </div>
+  </section>
+
+  <!-- EKRAN 5: Kalpler ve Yıldızlarla Süslenmiş Fotoğraf Tablosu -->
+  <section id="screen-5" class="screen" style="justify-content: flex-start; padding-top: 36px; padding-bottom: 50px;">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Bizim Güzel Anılarımız</h2>
+      <p class="gallery-sub">✨ 15.02.2024’ten Sonsuzluğa ❤️ Her Karesi Aşk ✨</p>
+    </div>
+
+    <!-- Tek seferlik fotoğrafları HTML içine kalıcı gömme alanı -->
+    <div class="bake-panel" id="bake-panel">
+      <p class="bake-info" id="bake-status">
+        10 fotoğrafı bir kez seç, sistem onları doğrudan bu HTML kodunun içine kalıcı gömsün ve hazır dosyayı indirsin:
+      </p>
+      <label class="btn-love" for="bake-photos-input" style="padding: 12px 26px; font-size: 0.95rem;">
+        📌 10 Fotoğrafı Seç ve Kodun İçine Göm
+      </label>
+      <input type="file" id="bake-photos-input" accept="image/*" multiple style="display:none" />
+      <button type="button" class="btn-love btn-gold" id="btn-download-baked" style="display:none; padding: 12px 26px; font-size: 0.95rem;">
+        💾 Fotoğraflar Gömülü Tek HTML İndir
+      </button>
+    </div>
+
+    <table class="photo-table" id="photo-table">
+      <tbody id="photo-table-body">
+        <!-- 1. Satır -->
+        <tr>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="0">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Seninle Her An" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Seninle Her An <span>❤️</span></div>
+            </div>
+          </td>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="1">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Gülüşün Dünyam" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Gülüşün Dünyam <span>❤️</span></div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 2. Satır -->
+        <tr>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="2">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="En Tatlı Hallerimiz" />
+              </div>
+              <div class="frame-caption"><span>✨</span> En Tatlı Hallerimiz <span>❤️</span></div>
+            </div>
+          </td>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="3">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Sana Bakarken" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Sana Bakarken <span>❤️</span></div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 3. Satır -->
+        <tr>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="4">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Siyah Beyaz Aşk" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Siyah Beyaz Aşk <span>❤️</span></div>
+            </div>
+          </td>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="5">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Gece Işığım" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Gece Işığım <span>❤️</span></div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 4. Satır -->
+        <tr>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="6">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Çiçek Gibi Anımız" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Çiçek Gibi Anımız <span>❤️</span></div>
+            </div>
+          </td>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="7">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Her Işıkta Seninle" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Her Işıkta Seninle <span>❤️</span></div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 5. Satır -->
+        <tr>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="8">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="Kalbim Seninle" />
+              </div>
+              <div class="frame-caption"><span>✨</span> Kalbim Seninle <span>❤️</span></div>
+            </div>
+          </td>
+          <td class="photo-cell">
+            <div class="ornate-frame" data-slot="9">
+              <span class="deco-tl">❤️</span>
+              <span class="deco-tr">✨</span>
+              <span class="deco-bl">⭐</span>
+              <span class="deco-br">💖</span>
+              <div class="photo-wrapper">
+                <div class="photo-placeholder">💖</div>
+                <img alt="İyi Ki Benimlesin" />
+              </div>
+              <div class="frame-caption"><span>✨</span> İyi Ki Benimlesin <span>❤️</span></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Fotoğraf Büyütme Modalı -->
+  <div id="lightbox">
+    <button type="button" id="lightbox-close">✕</button>
+    <img id="lightbox-img" src="" alt="Anımız" />
+  </div>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "askima_embedded_photos_v1";
+      var activeTimer = null;
+
+      // Arka Plan Kalp ve Yıldız Parçacıkları
+      function initAmbientParticles() {
+        var container = document.getElementById("ambient-bg");
+        if (!container) return;
+        container.innerHTML = "";
+        var symbols = ["❤️", "✨", "💖", "⭐", "💕", "🌟"];
+        for (var i = 0; i < 16; i++) {
+          var el = document.createElement("span");
+          el.className = "floating-particle";
+          el.textContent = symbols[i % symbols.length];
+          el.style.left = ((i * 6.2) % 96 + 2) + "%";
+          el.style.fontSize = (14 + (i % 4) * 4) + "px";
+          el.style.animationDuration = (9 + (i % 5) * 2) + "s";
+          el.style.animationDelay = (i * 0.55) + "s";
+          container.appendChild(el);
+        }
+      }
+
+      // Ekran Geçiş Fonksiyonu
+      function goToScreen(num) {
+        if (activeTimer) {
+          clearInterval(activeTimer);
+          activeTimer = null;
+        }
+
+        var screens = document.querySelectorAll(".screen");
+        for (var i = 0; i < screens.length; i++) {
+          screens[i].classList.remove("active");
+        }
+
+        var target = document.getElementById("screen-" + num);
+        if (target) {
+          target.classList.add("active");
+        }
+
+        try {
+          window.scrollTo(0, 0);
+        } catch (e) {}
+
+        if (num === 2) {
+          runScreen2Sequence();
+        }
+      }
+
+      // EKRAN 1: 15 Saniye Geri Sayım
+      var timer15Running = false;
+      function start15Countdown() {
+        if (timer15Running) return;
+        timer15Running = true;
+
+        var btn = document.getElementById("btn-start-15");
+        var numEl = document.getElementById("timer-num-1");
+        var boxEl = document.getElementById("timer-box-1");
+        btn.disabled = true;
+        btn.textContent = "Sayılıyor...";
+
+        var remaining = 15;
+        numEl.textContent = remaining;
+
+        activeTimer = setInterval(function () {
+          remaining--;
+          numEl.textContent = remaining;
+          if (boxEl) {
+            boxEl.classList.remove("tick");
+            void boxEl.offsetWidth;
+            boxEl.classList.add("tick");
+          }
+
+          if (remaining <= 0) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+            setTimeout(function () {
+              goToScreen(2);
+            }, 400);
+          }
+        }, 1000);
+      }
+
+      // EKRAN 2: Üstten Aşağıya Sıralı Harf Parlama & Kırmızı Kalp Düşüşü
+      function runScreen2Sequence() {
+        var words = ["SENİ", "ÇOK", "SEVİYORUM"];
+        var phraseContainer = document.getElementById("love-phrase");
+        var heart = document.getElementById("falling-heart");
+        var aura = document.getElementById("heart-aura");
+        var controls = document.getElementById("step2-controls");
+
+        phraseContainer.innerHTML = "";
+        phraseContainer.classList.remove("complete");
+        heart.classList.remove("drop-in");
+        aura.classList.remove("active");
+        controls.classList.remove("visible");
+
+        var spans = [];
+        for (var w = 0; w < words.length; w++) {
+          var row = document.createElement("div");
+          row.className = "love-word-row";
+          var letters = words[w].split("");
+
+          for (var c = 0; c < letters.length; c++) {
+            var span = document.createElement("span");
+            span.className = "love-char";
+            span.textContent = letters[c];
+            row.appendChild(span);
+            spans.push(span);
+          }
+          phraseContainer.appendChild(row);
+        }
+
+        for (var idx = 0; idx < spans.length; idx++) {
+          (function (el, index) {
+            setTimeout(function () {
+              el.classList.add("lit");
+            }, index * 140);
+          })(spans[idx], idx);
+        }
+
+        var totalTextDuration = spans.length * 140 + 450;
+
+        setTimeout(function () {
+          phraseContainer.classList.add("complete");
+        }, totalTextDuration);
+
+        setTimeout(function () {
+          heart.classList.add("drop-in");
+          aura.classList.add("active");
+        }, totalTextDuration + 250);
+
+        setTimeout(function () {
+          controls.classList.add("visible");
+        }, totalTextDuration + 1250);
+      }
+
+      // EKRAN 2: 2 Saniye Geri Sayım
+      var timer2Running = false;
+      function start2Countdown() {
+        if (timer2Running) return;
+        timer2Running = true;
+
+        var btn = document.getElementById("btn-next-2");
+        var numEl = document.getElementById("timer-num-2");
+        btn.disabled = true;
+        btn.textContent = "Sayılıyor...";
+
+        var remaining = 2;
+        numEl.textContent = remaining;
+
+        activeTimer = setInterval(function () {
+          remaining--;
+          numEl.textContent = remaining;
+          if (remaining <= 0) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+            setTimeout(function () {
+              goToScreen(3);
+            }, 400);
+          }
+        }, 1000);
+      }
+
+      // EKRAN 3: 24 Saniye Geri Sayım
+      var timer24Running = false;
+      function start24Countdown() {
+        if (timer24Running) return;
+        timer24Running = true;
+
+        var btn = document.getElementById("btn-start-24");
+        var numEl = document.getElementById("timer-num-3");
+        var boxEl = document.getElementById("timer-box-3");
+        btn.disabled = true;
+        btn.textContent = "Sayılıyor...";
+
+        var remaining = 24;
+        numEl.textContent = remaining;
+
+        activeTimer = setInterval(function () {
+          remaining--;
+          numEl.textContent = remaining;
+          if (boxEl) {
+            boxEl.classList.remove("tick");
+            void boxEl.offsetWidth;
+            boxEl.classList.add("tick");
+          }
+
+          if (remaining <= 0) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+            setTimeout(function () {
+              goToScreen(4);
+            }, 400);
+          }
+        }, 1000);
+      }
+
+      // Çerçevelere Fotoğraf Yerleştirme
+      function applyPhotosToFrames(dataUrls) {
+        var frames = document.querySelectorAll(".ornate-frame");
+        for (var i = 0; i < frames.length; i++) {
+          var wrapper = frames[i].querySelector(".photo-wrapper");
+          var img = frames[i].querySelector("img");
+          if (dataUrls[i] && wrapper && img) {
+            img.src = dataUrls[i];
+            wrapper.classList.add("has-img");
+          }
+        }
+      }
+
+      // Fotoğrafı iOS/Web uyumlu JPEG Data URL'ye çevir (HEIC dahil)
+      function compressImageFile(file) {
+        return new Promise(function (resolve) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var img = new Image();
+            img.onload = function () {
+              var maxSide = 880;
+              var w = img.width;
+              var h = img.height;
+              if (w > maxSide || h > maxSide) {
+                if (w > h) {
+                  h = Math.round((h * maxSide) / w);
+                  w = maxSide;
+                } else {
+                  w = Math.round((w * maxSide) / h);
+                  h = maxSide;
+                }
+              }
+              var canvas = document.createElement("canvas");
+              canvas.width = w;
+              canvas.height = h;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0, w, h);
+              resolve(canvas.toDataURL("image/jpeg", 0.82));
+            };
+            img.onerror = function () {
+              resolve(e.target.result);
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Fotoğraflar İçine Gömülü Standalone HTML Dosyası Oluştur ve İndir
+      function downloadSelfContainedHtml() {
+        var clone = document.documentElement.cloneNode(true);
+
+        // Seçim panelini dışa aktarılan dosyadan tamamen kaldır
+        var panel = clone.querySelector("#bake-panel");
+        if (panel) panel.remove();
+
+        // Kayıtlı Base64 resimleri kopyadaki img etiketlerine sabit yaz
+        var liveFrames = document.querySelectorAll(".ornate-frame");
+        var cloneFrames = clone.querySelectorAll(".ornate-frame");
+        for (var i = 0; i < liveFrames.length; i++) {
+          var liveImg = liveFrames[i].querySelector("img");
+          var cloneImg = cloneFrames[i] ? cloneFrames[i].querySelector("img") : null;
+          var cloneWrapper = cloneFrames[i] ? cloneFrames[i].querySelector(".photo-wrapper") : null;
+          var clonePlaceholder = cloneFrames[i] ? cloneFrames[i].querySelector(".photo-placeholder") : null;
+          if (liveImg && liveImg.src && liveImg.src.indexOf("data:image") === 0 && cloneImg) {
+            cloneImg.setAttribute("src", liveImg.src);
+            cloneImg.style.display = "block";
+            if (cloneWrapper) cloneWrapper.classList.add("has-img");
+            if (clonePlaceholder) clonePlaceholder.remove();
+          }
+        }
+
+        // Başlangıç ekranını Ekran 1 yap
+        var cloneScreens = clone.querySelectorAll(".screen");
+        for (var s = 0; s < cloneScreens.length; s++) {
+          cloneScreens[s].classList.remove("active");
+        }
+        var s1 = clone.querySelector("#screen-1");
+        if (s1) s1.classList.add("active");
+
+        var htmlOutput = "<!DOCTYPE html>\n" + clone.outerHTML;
+        var blob = new Blob([htmlOutput], { type: "text/html;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "Askima_15_02_2024.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 2000);
+      }
+
+      // 10 Fotoğraf Seçildiğinde İşle
+      function handleBakeSelection(event) {
+        var files = event.target.files;
+        if (!files || !files.length) return;
+
+        var statusEl = document.getElementById("bake-status");
+        var dlBtn = document.getElementById("btn-download-baked");
+        statusEl.textContent = "Fotoğraflar işleniyor ve HTML içine gömülüyor...";
+
+        var limitedFiles = Array.prototype.slice.call(files, 0, 10);
+        Promise.all(limitedFiles.map(compressImageFile)).then(function (dataUrls) {
+          applyPhotosToFrames(dataUrls);
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataUrls));
+          } catch (e) {}
+
+          statusEl.innerHTML = "✅ <strong>" + dataUrls.length + " fotoğraf</strong> kodun içine gömüldü! Aşağıdaki butondan hazır tek dosyayı indirip sevgiline gönderebilirsin:";
+          dlBtn.style.display = "inline-flex";
+          downloadSelfContainedHtml();
+        });
+      }
+
+      // Çerçevelere Tıklayınca Büyütme
+      function bindPhotoFrames() {
+        var frames = document.querySelectorAll(".ornate-frame");
+        for (var i = 0; i < frames.length; i++) {
+          (function (frame) {
+            frame.addEventListener("click", function () {
+              var img = frame.querySelector("img");
+              if (img && img.src && img.src.indexOf("data:image") === 0) {
+                openLightbox(img.src);
+              }
+            });
+          })(frames[i]);
+        }
+      }
+
+      function openLightbox(src) {
+        var lb = document.getElementById("lightbox");
+        var img = document.getElementById("lightbox-img");
+        img.src = src;
+        lb.classList.add("open");
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+      }
+
+      // Daha önce seçildiyse otomatik yükle
+      function restoreSavedPhotos() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            var parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length) {
+              applyPhotosToFrames(parsed);
+              var dlBtn = document.getElementById("btn-download-baked");
+              if (dlBtn) dlBtn.style.display = "inline-flex";
+            }
+          }
+        } catch (e) {}
+      }
+
+      document.getElementById("btn-start-15").addEventListener("click", start15Countdown);
+      document.getElementById("btn-next-2").addEventListener("click", start2Countdown);
+      document.getElementById("btn-start-24").addEventListener("click", start24Countdown);
+      document.getElementById("btn-to-gallery").addEventListener("click", function () {
+        goToScreen(5);
+      });
+
+      var bakeInput = document.getElementById("bake-photos-input");
+      if (bakeInput) bakeInput.addEventListener("change", handleBakeSelection);
+
+      var dlBtn = document.getElementById("btn-download-baked");
+      if (dlBtn) dlBtn.addEventListener("click", downloadSelfContainedHtml);
+
+      document.getElementById("lightbox").addEventListener("click", closeLightbox);
+      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+
+      bindPhotoFrames();
+      restoreSavedPhotos();
+      initAmbientParticles();
+    })();
+  </script>
+</body>
+</html>
