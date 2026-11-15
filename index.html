@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Aşkım’a ❤️" />
   <title>Aşkım’a ❤️ 15.02.2024</title>
 
   <!-- Google Fonts -->
@@ -205,7 +208,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
     }
 
@@ -227,14 +230,20 @@
     }
 
     .btn-compact {
-      padding: 12px 24px;
-      font-size: 0.92rem;
+      padding: 11px 20px;
+      font-size: 0.9rem;
     }
 
     .btn-gold {
       background: linear-gradient(135deg, #f59e0b 0%, var(--gold) 100%);
       color: #1f0712;
       box-shadow: 0 8px 24px rgba(255, 209, 102, 0.45);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 117, 151, 0.45);
+      box-shadow: none;
     }
 
     .helper-note {
@@ -546,20 +555,21 @@
       100% { transform: scale(1.22) rotate(8deg); opacity: 1; }
     }
 
+    /* Küçük Resimlerin Tam Oturması İçin Sabit Oranlı Kapsayıcı */
     .photo-wrapper {
+      position: relative;
+      display: block;
       width: 100%;
       aspect-ratio: 3 / 4;
       border-radius: 14px;
       overflow: hidden;
       background: radial-gradient(circle, #2d0d1d 0%, #14050d 100%);
-      position: relative;
       border: 1px solid rgba(255, 209, 102, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .photo-placeholder {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -579,9 +589,12 @@
     }
 
     .photo-wrapper img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 22%;
       display: none;
       transition: transform 0.5s ease;
     }
@@ -620,6 +633,7 @@
     #lightbox img {
       max-width: 92vw;
       max-height: 76vh;
+      object-fit: contain;
       border-radius: 18px;
       border: 2px solid #ff5c8a;
       box-shadow: 0 0 40px rgba(255, 42, 95, 0.6);
@@ -742,12 +756,15 @@
 
     <div class="sync-panel" id="sync-panel">
       <p class="sync-status" id="sync-status">
-        ☁️ Bulut bağlantısı kuruluyor... Eklediğin her fotoğraf tüm cihazlarda anında görünür.
+        ☁️ Bulut fotoğrafları yükleniyor...
       </p>
       <div class="sync-actions">
         <label class="btn-love btn-compact" for="bulk-photos-input">
           ☁️ Toplu Fotoğraf Yükle (Max 10)
         </label>
+        <button type="button" class="btn-love btn-glass btn-compact" id="btn-force-sync">
+          🔄 Yenile
+        </button>
         <input type="file" id="bulk-photos-input" accept="image/*" multiple style="display:none" />
         <input type="file" id="single-photo-input" accept="image/*" style="display:none" />
       </div>
@@ -931,6 +948,7 @@
       collection,
       doc,
       setDoc,
+      getDocs,
       onSnapshot
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
@@ -954,10 +972,49 @@
     } catch (e) {}
 
     const COLLECTION_NAME = "askima_photos";
-    const CACHE_KEY = "askima_cloud_cache_v1";
+    const IDB_NAME = "AskimaPhotosDB";
+    const IDB_STORE = "photos";
     let activeTimer = null;
-    let selectedSlotForSingleUpload = 0;
+    let selectedSlotForSingleUpload = "0";
     let photoMap = {};
+
+    /* Yüksek Kapasiteli IndexedDB Yardımcıları (iOS Ana Ekran Uyumlu) */
+    function openLocalDB() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) return reject("no-idb");
+        const req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+          const idb = e.target.result;
+          if (!idb.objectStoreNames.contains(IDB_STORE)) {
+            idb.createObjectStore(IDB_STORE);
+          }
+        };
+        req.onsuccess = (e) => resolve(e.target.result);
+        req.onerror = () => reject("idb-error");
+      });
+    }
+
+    async function saveMapToLocalDB(map) {
+      try {
+        const idb = await openLocalDB();
+        const tx = idb.transaction(IDB_STORE, "readwrite");
+        tx.objectStore(IDB_STORE).put(map, "slotMap");
+      } catch (e) {}
+    }
+
+    async function loadMapFromLocalDB() {
+      try {
+        const idb = await openLocalDB();
+        return await new Promise((resolve) => {
+          const tx = idb.transaction(IDB_STORE, "readonly");
+          const req = tx.objectStore(IDB_STORE).get("slotMap");
+          req.onsuccess = () => resolve(req.result || {});
+          req.onerror = () => resolve({});
+        });
+      } catch (e) {
+        return {};
+      }
+    }
 
     // Arka Plan Kalp ve Yıldız Parçacıkları
     function initAmbientParticles() {
@@ -994,6 +1051,7 @@
       } catch (e) {}
 
       if (num === 2) runScreen2Sequence();
+      if (num === 5) fetchPhotosFromCloud();
     }
 
     // Geri Sayım Yöneticisi
@@ -1080,13 +1138,15 @@
         const url = map[slot];
 
         if (url && wrapper && img) {
-          img.src = url;
+          if (img.getAttribute("src") !== url) {
+            img.src = url;
+          }
           wrapper.classList.add("has-img");
         }
       });
     }
 
-    // Fotoğrafı Firestore Limitine Uygun Boyuta Sıkıştır (Max ~70-90 KB)
+    // Fotoğrafı Firestore Limitine Uygun Boyuta Sıkıştır (< 700 KB)
     function compressImageFile(file) {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -1095,25 +1155,36 @@
           const img = new Image();
           img.onerror = () => resolve("");
           img.onload = () => {
-            const maxSide = 720;
-            let w = img.width;
-            let h = img.height;
+            let maxSide = 760;
+            let quality = 0.74;
+            let dataUrl = "";
 
-            if (w > maxSide || h > maxSide) {
-              if (w > h) {
-                h = Math.round((h * maxSide) / w);
-                w = maxSide;
-              } else {
-                w = Math.round((w * maxSide) / h);
-                h = maxSide;
+            for (let attempt = 0; attempt < 3; attempt++) {
+              let w = img.width;
+              let h = img.height;
+
+              if (w > maxSide || h > maxSide) {
+                if (w > h) {
+                  h = Math.round((h * maxSide) / w);
+                  w = maxSide;
+                } else {
+                  w = Math.round((w * maxSide) / h);
+                  h = maxSide;
+                }
               }
+
+              const canvas = document.createElement("canvas");
+              canvas.width = w;
+              canvas.height = h;
+              canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+              dataUrl = canvas.toDataURL("image/jpeg", quality);
+
+              if (dataUrl.length < 700000) break;
+              maxSide = Math.round(maxSide * 0.75);
+              quality -= 0.14;
             }
 
-            const canvas = document.createElement("canvas");
-            canvas.width = w;
-            canvas.height = h;
-            canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-            resolve(canvas.toDataURL("image/jpeg", 0.72));
+            resolve(dataUrl);
           };
           img.src = e.target.result;
         };
@@ -1131,6 +1202,10 @@
         statusEl.textContent = "❌ Fotoğraf okunamadı, lütfen başka bir görsel deneyin.";
         return;
       }
+
+      photoMap[slotIndex] = compressedDataUrl;
+      renderPhotosFromMap(photoMap);
+      await saveMapToLocalDB(photoMap);
 
       try {
         await setDoc(doc(db, COLLECTION_NAME, "slot_" + slotIndex), {
@@ -1156,13 +1231,17 @@
         const compressedList = await Promise.all(files.map(compressImageFile));
         const tasks = compressedList.map((url, idx) => {
           if (!url) return Promise.resolve();
+          photoMap[String(idx)] = url;
           return setDoc(doc(db, COLLECTION_NAME, "slot_" + idx), {
             url,
             updatedAt: Date.now()
           });
         });
 
+        renderPhotosFromMap(photoMap);
+        await saveMapToLocalDB(photoMap);
         await Promise.all(tasks);
+
         statusEl.textContent = `✅ ${files.length} fotoğraf buluta aktarıldı! Diğer cihazlarda anında görünüyor.`;
       } catch (err) {
         handleFirestoreError(err);
@@ -1175,48 +1254,57 @@
         statusEl.innerHTML =
           "⚠️ <strong>Firebase izni kapalı:</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp yayınlayın.";
       } else {
-        statusEl.textContent = "⚠️ Bulut bağlantı hatası: " + (err?.message || "Bilinmeyen hata");
+        statusEl.textContent = "⚠️ Bulut bağlantı hatası: " + (err?.message || "İnternet bağlantınızı kontrol edin.");
       }
     }
 
-    // Gerçek Zamanlı Firebase Dinleyicisi (Tüm Cihazlar Anlık Senkron)
-    function startRealtimePhotoSync() {
+    function applySnapshotData(snapshot) {
       const statusEl = document.getElementById("sync-status");
+      let count = 0;
 
+      snapshot.forEach((docSnap) => {
+        const id = docSnap.id;
+        if (id.startsWith("slot_")) {
+          const slotIndex = id.replace("slot_", "");
+          const data = docSnap.data();
+          if (data && data.url) {
+            photoMap[slotIndex] = data.url;
+            count++;
+          }
+        }
+      });
+
+      renderPhotosFromMap(photoMap);
+      saveMapToLocalDB(photoMap);
+
+      statusEl.textContent =
+        count > 0
+          ? `🟢 Canlı Bulut Aktif (${count}/10 fotoğraf tüm cihazlarda senkronize)`
+          : "🟢 Canlı Bulut Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle";
+    }
+
+    // Açılışta ve Arka Plandan Dönüşte Buluttan Zorunlu Çekim
+    async function fetchPhotosFromCloud() {
+      const statusEl = document.getElementById("sync-status");
+      statusEl.textContent = "🔄 Buluttan fotoğraflar kontrol ediliyor...";
+      try {
+        const snapshot = await getDocs(collection(db, COLLECTION_NAME));
+        applySnapshotData(snapshot);
+      } catch (err) {
+        handleFirestoreError(err);
+      }
+    }
+
+    // Gerçek Zamanlı Firebase Dinleyicisi
+    function startRealtimePhotoSync() {
       onSnapshot(
         collection(db, COLLECTION_NAME),
-        (snapshot) => {
-          let count = 0;
-          snapshot.forEach((docSnap) => {
-            const id = docSnap.id; // "slot_0" .. "slot_9"
-            if (id.startsWith("slot_")) {
-              const slotIndex = id.replace("slot_", "");
-              const data = docSnap.data();
-              if (data && data.url) {
-                photoMap[slotIndex] = data.url;
-                count++;
-              }
-            }
-          });
-
-          renderPhotosFromMap(photoMap);
-
-          try {
-            localStorage.setItem(CACHE_KEY, JSON.stringify(photoMap));
-          } catch (e) {}
-
-          statusEl.textContent =
-            count > 0
-              ? `🟢 Canlı Bulut Aktif (${count}/10 fotoğraf tüm cihazlarda senkronize)`
-              : "🟢 Canlı Bulut Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle";
-        },
-        (err) => {
-          handleFirestoreError(err);
-        }
+        (snapshot) => applySnapshotData(snapshot),
+        (err) => handleFirestoreError(err)
       );
     }
 
-    // Çerçeve Tıklama Etkileşimi (Boşsa Ekle, Doluysa Büyüt/Değiştir)
+    // Çerçeve Tıklama Etkileşimi
     function bindPhotoFrames() {
       const singleInput = document.getElementById("single-photo-input");
 
@@ -1252,18 +1340,34 @@
       document.getElementById("lightbox").classList.remove("open");
     }
 
-    // Hızlı Açılış İçin Yerel Önbelleği Yükle
-    function loadCachedPhotosFirst() {
-      try {
-        const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) {
-          photoMap = JSON.parse(cached) || {};
-          renderPhotosFromMap(photoMap);
-        }
-      } catch (e) {}
+    // Başlatma Akışı
+    async function bootApp() {
+      initAmbientParticles();
+      bindPhotoFrames();
+
+      // Önce yerel IndexedDB önbelleğini anında göster
+      const cachedMap = await loadMapFromLocalDB();
+      if (cachedMap && Object.keys(cachedMap).length > 0) {
+        photoMap = cachedMap;
+        renderPhotosFromMap(photoMap);
+      }
+
+      // Ardından buluttan en güncel veriyi çek ve canlı dinlemeyi başlat
+      await fetchPhotosFromCloud();
+      startRealtimePhotoSync();
     }
 
-    // Başlat
+    // Ana Ekrana Kaydedilen Uygulama Arka Plandan Tekrar Açıldığında Yenile
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        fetchPhotosFromCloud();
+      }
+    });
+
+    window.addEventListener("pageshow", () => {
+      fetchPhotosFromCloud();
+    });
+
     document.getElementById("btn-start-15").addEventListener("click", () =>
       runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
     );
@@ -1276,13 +1380,11 @@
     document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
 
     document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
+    document.getElementById("btn-force-sync").addEventListener("click", fetchPhotosFromCloud);
     document.getElementById("lightbox").addEventListener("click", closeLightbox);
     document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
 
-    bindPhotoFrames();
-    loadCachedPhotosFirst();
-    startRealtimePhotoSync();
-    initAmbientParticles();
+    bootApp();
   </script>
 </body>
 </html>
