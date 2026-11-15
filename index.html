@@ -118,7 +118,7 @@
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-glow);
       border-radius: 28px;
-      padding: 38px 26px;
+      padding: 36px 26px;
       width: 100%;
       max-width: 520px;
       box-shadow:
@@ -133,7 +133,7 @@
       padding: 40px 28px;
     }
 
-    /* Ekran 1 Başlık & Geri Sayım */
+    /* Ekran 1 Başlık */
     .title-askim {
       font-family: 'Dancing Script', Georgia, cursive;
       font-size: clamp(3.5rem, 10vw, 4.9rem);
@@ -141,27 +141,62 @@
       text-shadow:
         0 0 15px rgba(255, 42, 95, 0.85),
         0 0 35px rgba(255, 42, 95, 0.5);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       font-size: 1.05rem;
       color: #ffd6e0;
       opacity: 0.92;
-      margin-bottom: 26px;
+      margin-bottom: 14px;
       letter-spacing: 0.3px;
     }
 
+    /* Çelenkli Saniye Yuvarlağı */
+    .timer-wreath-wrap {
+      position: relative;
+      width: 214px;
+      height: 214px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wreath-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+      filter: drop-shadow(0 0 10px rgba(255, 209, 102, 0.45)) drop-shadow(0 0 18px rgba(255, 42, 95, 0.55));
+      animation: wreathGlow 2.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes wreathGlow {
+      from {
+        transform: scale(0.99);
+        filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.4)) drop-shadow(0 0 14px rgba(255, 42, 95, 0.45));
+      }
+      to {
+        transform: scale(1.025);
+        filter: drop-shadow(0 0 14px rgba(255, 209, 102, 0.75)) drop-shadow(0 0 24px rgba(255, 42, 95, 0.75));
+      }
+    }
+
     .timer-display {
-      width: 124px;
-      height: 124px;
-      margin: 0 auto 26px;
+      position: relative;
+      z-index: 2;
+      width: 120px;
+      height: 120px;
+      margin: 0;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 42, 95, 0.24) 0%, rgba(20, 6, 14, 0.92) 75%);
-      border: 3px solid var(--primary);
+      background: radial-gradient(circle, rgba(255, 42, 95, 0.28) 0%, rgba(20, 6, 14, 0.94) 76%);
+      border: 2.5px solid var(--gold);
       box-shadow:
-        0 0 25px rgba(255, 42, 95, 0.55),
-        inset 0 0 18px rgba(255, 42, 95, 0.35);
+        0 0 24px rgba(255, 42, 95, 0.55),
+        inset 0 0 18px rgba(255, 209, 102, 0.25);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -174,7 +209,7 @@
     }
 
     .timer-number {
-      font-size: 2.7rem;
+      font-size: 2.6rem;
       font-weight: 800;
       color: #ffffff;
       line-height: 1;
@@ -182,11 +217,12 @@
     }
 
     .timer-unit {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: #ff9eb5;
+      color: var(--gold);
       margin-top: 4px;
+      font-weight: 600;
     }
 
     /* Butonlar */
@@ -602,7 +638,7 @@
     .photo-loading-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(15, 3, 9, 0.82);
+      background: rgba(15, 3, 9, 0.85);
       display: none;
       flex-direction: column;
       align-items: center;
@@ -705,15 +741,103 @@
   <!-- Uçuşan Kalp ve Yıldız Arka Planı -->
   <div id="ambient-bg"></div>
 
-  <!-- EKRAN 1: Aşkım'a & 15 Saniye Geri Sayım -->
+  <!-- Paylaşılan Çelenk SVG Tanımları -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="wreathGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fff3b0" />
+        <stop offset="50%" stop-color="#ffd166" />
+        <stop offset="100%" stop-color="#e09f3e" />
+      </linearGradient>
+      <linearGradient id="wreathRose" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff8fab" />
+        <stop offset="50%" stop-color="#ff2a5f" />
+        <stop offset="100%" stop-color="#9e0031" />
+      </linearGradient>
+
+      <g id="romantic-wreath-art">
+        <!-- Dış İnce Altın Halka -->
+        <circle cx="110" cy="110" r="82" fill="none" stroke="url(#wreathGold)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.7" />
+        <!-- Sol ve Sağ Çelenk Dalları -->
+        <path d="M 105 196 C 48 190, 22 142, 26 96 C 29 58, 56 30, 94 22" fill="none" stroke="url(#wreathGold)" stroke-width="3.2" stroke-linecap="round" />
+        <path d="M 115 196 C 172 190, 198 142, 194 96 C 191 58, 164 30, 126 22" fill="none" stroke="url(#wreathGold)" stroke-width="3.2" stroke-linecap="round" />
+
+        <!-- Sol Taraf Yaprakları -->
+        <ellipse cx="78" cy="190" rx="13" ry="6" transform="rotate(-24 78 190)" fill="url(#wreathGold)" />
+        <ellipse cx="66" cy="176" rx="13" ry="6" transform="rotate(28 66 176)" fill="url(#wreathRose)" />
+        <ellipse cx="48" cy="168" rx="14" ry="6.5" transform="rotate(-46 48 168)" fill="url(#wreathGold)" />
+        <ellipse cx="42" cy="150" rx="13" ry="6" transform="rotate(12 42 150)" fill="url(#wreathRose)" />
+        <ellipse cx="28" cy="134" rx="14" ry="6.5" transform="rotate(-72 28 134)" fill="url(#wreathGold)" />
+        <ellipse cx="32" cy="114" rx="13" ry="6" transform="rotate(-12 32 114)" fill="url(#wreathRose)" />
+        <ellipse cx="24" cy="96" rx="14" ry="6.5" transform="rotate(-95 24 96)" fill="url(#wreathGold)" />
+        <ellipse cx="34" cy="78" rx="13" ry="6" transform="rotate(-38 34 78)" fill="url(#wreathRose)" />
+        <ellipse cx="36" cy="60" rx="14" ry="6.5" transform="rotate(-122 36 60)" fill="url(#wreathGold)" />
+        <ellipse cx="52" cy="48" rx="13" ry="6" transform="rotate(-62 52 48)" fill="url(#wreathRose)" />
+        <ellipse cx="64" cy="34" rx="13" ry="6" transform="rotate(-145 64 34)" fill="url(#wreathGold)" />
+        <ellipse cx="82" cy="30" rx="12" ry="5.5" transform="rotate(-82 82 30)" fill="url(#wreathRose)" />
+
+        <!-- Sağ Taraf Yaprakları -->
+        <ellipse cx="142" cy="190" rx="13" ry="6" transform="rotate(24 142 190)" fill="url(#wreathGold)" />
+        <ellipse cx="154" cy="176" rx="13" ry="6" transform="rotate(-28 154 176)" fill="url(#wreathRose)" />
+        <ellipse cx="172" cy="168" rx="14" ry="6.5" transform="rotate(46 172 168)" fill="url(#wreathGold)" />
+        <ellipse cx="178" cy="150" rx="13" ry="6" transform="rotate(-12 178 150)" fill="url(#wreathRose)" />
+        <ellipse cx="192" cy="134" rx="14" ry="6.5" transform="rotate(72 192 134)" fill="url(#wreathGold)" />
+        <ellipse cx="188" cy="114" rx="13" ry="6" transform="rotate(12 188 114)" fill="url(#wreathRose)" />
+        <ellipse cx="196" cy="96" rx="14" ry="6.5" transform="rotate(95 196 96)" fill="url(#wreathGold)" />
+        <ellipse cx="186" cy="78" rx="13" ry="6" transform="rotate(38 186 78)" fill="url(#wreathRose)" />
+        <ellipse cx="184" cy="60" rx="14" ry="6.5" transform="rotate(122 184 60)" fill="url(#wreathGold)" />
+        <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathRose)" />
+        <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathGold)" />
+        <ellipse cx="138" cy="30" rx="12" ry="5.5" transform="rotate(82 138 30)" fill="url(#wreathRose)" />
+
+        <!-- Çelenk Üzerindeki Minik Güller ve Altın Tomurcuklar -->
+        <circle cx="54" cy="176" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="54" cy="176" r="2.2" fill="#ffd6e0" />
+        <circle cx="166" cy="176" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="166" cy="176" r="2.2" fill="#ffd6e0" />
+
+        <circle cx="24" cy="115" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="24" cy="115" r="2.2" fill="#ffd6e0" />
+        <circle cx="196" cy="115" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="196" cy="115" r="2.2" fill="#ffd6e0" />
+
+        <circle cx="46" cy="44" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="46" cy="44" r="2.2" fill="#ffd6e0" />
+        <circle cx="174" cy="44" r="5.5" fill="url(#wreathRose)" />
+        <circle cx="174" cy="44" r="2.2" fill="#ffd6e0" />
+
+        <circle cx="34" cy="154" r="3.2" fill="url(#wreathGold)" />
+        <circle cx="186" cy="154" r="3.2" fill="url(#wreathGold)" />
+        <circle cx="28" cy="74" r="3.2" fill="url(#wreathGold)" />
+        <circle cx="192" cy="74" r="3.2" fill="url(#wreathGold)" />
+        <circle cx="76" cy="24" r="3.2" fill="url(#wreathGold)" />
+        <circle cx="144" cy="24" r="3.2" fill="url(#wreathGold)" />
+
+        <!-- Üst Taç Yıldızı -->
+        <path d="M110 8 L113 16 L121 19 L113 22 L110 30 L107 22 L99 19 L107 16 Z" fill="url(#wreathGold)" />
+
+        <!-- Alt Kurdele ve Kalp Tokası -->
+        <path d="M110 198 C96 212, 82 206, 92 195 C98 189, 106 194, 110 198 Z" fill="url(#wreathRose)" />
+        <path d="M110 198 C124 212, 138 206, 128 195 C122 189, 114 194, 110 198 Z" fill="url(#wreathRose)" />
+        <path d="M110 205 L103 198 C99 194, 104 188, 110 193 C116 188, 121 194, 117 198 Z" fill="url(#wreathGold)" />
+      </g>
+    </defs>
+  </svg>
+
+  <!-- EKRAN 1: Aşkım'a & Çelenkli 15 Saniye Geri Sayım -->
   <section id="screen-1" class="screen active">
     <div class="glass-card">
       <h1 class="title-askim">Aşkım’a</h1>
       <p class="subtitle">Birkaç saniye bekleyin...</p>
 
-      <div class="timer-display" id="timer-box-1">
-        <span class="timer-number" id="timer-num-1">15</span>
-        <span class="timer-unit">Saniye</span>
+      <div class="timer-wreath-wrap">
+        <svg class="wreath-svg" viewBox="0 0 220 220">
+          <use href="#romantic-wreath-art" />
+        </svg>
+        <div class="timer-display" id="timer-box-1">
+          <span class="timer-number" id="timer-num-1">15</span>
+          <span class="timer-unit">Saniye</span>
+        </div>
       </div>
 
       <button type="button" class="btn-love" id="btn-start-15">
@@ -752,12 +876,17 @@
     </div>
   </section>
 
-  <!-- EKRAN 3: 24 Saniye Say & Sabrına Değecek Aşkım -->
+  <!-- EKRAN 3: Çelenkli 24 Saniye Say & Sabrına Değecek Aşkım -->
   <section id="screen-3" class="screen">
     <div class="glass-card">
-      <div class="timer-display" id="timer-box-3">
-        <span class="timer-number" id="timer-num-3">24</span>
-        <span class="timer-unit">Saniye</span>
+      <div class="timer-wreath-wrap">
+        <svg class="wreath-svg" viewBox="0 0 220 220">
+          <use href="#romantic-wreath-art" />
+        </svg>
+        <div class="timer-display" id="timer-box-3">
+          <span class="timer-number" id="timer-num-3">24</span>
+          <span class="timer-unit">Saniye</span>
+        </div>
       </div>
 
       <button type="button" class="btn-love" id="btn-start-24">
@@ -991,20 +1120,10 @@
     </div>
   </div>
 
-  <!-- Firebase & Uygulama Mantığı -->
+  <!-- Firebase Analytics -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
-    import {
-      initializeFirestore,
-      collection,
-      doc,
-      setDoc,
-      deleteDoc,
-      getDocFromServer,
-      getDocsFromServer,
-      onSnapshot
-    } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws",
@@ -1016,454 +1135,489 @@
       measurementId: "G-3CVGBVWRMH"
     };
 
-    const app = initializeApp(firebaseConfig);
-    // iOS Ana Ekran & Safari mobil ağ donmasını önlemek için Long Polling aktif
-    const db = initializeFirestore(app, {
-      experimentalForceLongPolling: true
-    });
-
     try {
+      const app = initializeApp(firebaseConfig);
       if (window.location.protocol.startsWith("http")) {
         getAnalytics(app);
       }
     } catch (e) {}
+  </script>
 
-    const COLLECTION_NAME = "askima_photos";
-    let activeTimer = null;
-    let selectedSlotForSingleUpload = "0";
-    let photoMap = {};
+  <!-- Doğrudan Sunucu REST API ile Gerçek Zamanlı Fotoğraf Senkronizasyonu -->
+  <script>
+    (function () {
+      const PROJECT_ID = "askima-d585d";
+      const API_KEY = "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws";
+      const COLLECTION_NAME = "askima_photos";
+      const BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_NAME}`;
 
-    // Zaman aşımı koruması (Sessiz donmaları önler)
-    function withTimeout(promise, ms, msg) {
-      return Promise.race([
-        promise,
-        new Promise((_, reject) => setTimeout(() => reject(new Error(msg)), ms))
-      ]);
-    }
+      let activeTimer = null;
+      let syncInterval = null;
+      let isUploadingNow = false;
+      let selectedSlotForSingleUpload = "0";
+      let photoMap = {};
 
-    function setStatus(htmlText, isError = false) {
-      const statusEl = document.getElementById("sync-status");
-      if (!statusEl) return;
-      statusEl.innerHTML = htmlText;
-      statusEl.classList.toggle("error", isError);
-    }
-
-    function setSlotUploading(slotIndex, isUploading) {
-      const frame = document.querySelector(`.ornate-frame[data-slot="${slotIndex}"]`);
-      if (!frame) return;
-      const wrapper = frame.querySelector(".photo-wrapper");
-      if (wrapper) wrapper.classList.toggle("is-uploading", isUploading);
-    }
-
-    // Arka Plan Kalp ve Yıldız Parçacıkları
-    function initAmbientParticles() {
-      const container = document.getElementById("ambient-bg");
-      if (!container) return;
-      container.innerHTML = "";
-
-      const symbols = ["❤️", "✨", "💖", "⭐", "💕", "🌟"];
-      for (let i = 0; i < 16; i++) {
-        const el = document.createElement("span");
-        el.className = "floating-particle";
-        el.textContent = symbols[i % symbols.length];
-        el.style.left = ((i * 6.2) % 96 + 2) + "%";
-        el.style.fontSize = (14 + (i % 4) * 4) + "px";
-        el.style.animationDuration = (9 + (i % 5) * 2) + "s";
-        el.style.animationDelay = (i * 0.55) + "s";
-        container.appendChild(el);
-      }
-    }
-
-    // Ekran Geçişi
-    function goToScreen(num) {
-      if (activeTimer) {
-        clearInterval(activeTimer);
-        activeTimer = null;
+      function setStatus(htmlText, isError = false) {
+        const statusEl = document.getElementById("sync-status");
+        if (!statusEl) return;
+        statusEl.innerHTML = htmlText;
+        statusEl.classList.toggle("error", isError);
       }
 
-      document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
-      const target = document.getElementById("screen-" + num);
-      if (target) target.classList.add("active");
+      function setSlotUploading(slotIndex, isUploading) {
+        const frame = document.querySelector(`.ornate-frame[data-slot="${slotIndex}"]`);
+        if (!frame) return;
+        const wrapper = frame.querySelector(".photo-wrapper");
+        if (wrapper) wrapper.classList.toggle("is-uploading", isUploading);
+      }
 
-      try {
-        window.scrollTo(0, 0);
-      } catch (e) {}
+      // Arka Plan Kalp ve Yıldız Parçacıkları
+      function initAmbientParticles() {
+        const container = document.getElementById("ambient-bg");
+        if (!container) return;
+        container.innerHTML = "";
 
-      if (num === 2) runScreen2Sequence();
-      if (num === 5) fetchPhotosFromServer();
-    }
-
-    // Geri Sayım Yöneticisi
-    function runCountdown({ seconds, btnId, numId, boxId, nextScreen }) {
-      const btn = document.getElementById(btnId);
-      const numEl = document.getElementById(numId);
-      const boxEl = boxId ? document.getElementById(boxId) : null;
-
-      if (!btn || btn.disabled) return;
-      btn.disabled = true;
-      btn.textContent = "Sayılıyor...";
-
-      let remaining = seconds;
-      numEl.textContent = remaining;
-
-      activeTimer = setInterval(() => {
-        remaining--;
-        numEl.textContent = remaining;
-
-        if (boxEl && boxEl.classList.contains("timer-display")) {
-          boxEl.classList.remove("tick");
-          void boxEl.offsetWidth;
-          boxEl.classList.add("tick");
+        const symbols = ["❤️", "✨", "💖", "⭐", "💕", "🌟"];
+        for (let i = 0; i < 16; i++) {
+          const el = document.createElement("span");
+          el.className = "floating-particle";
+          el.textContent = symbols[i % symbols.length];
+          el.style.left = ((i * 6.2) % 96 + 2) + "%";
+          el.style.fontSize = (14 + (i % 4) * 4) + "px";
+          el.style.animationDuration = (9 + (i % 5) * 2) + "s";
+          el.style.animationDelay = (i * 0.55) + "s";
+          container.appendChild(el);
         }
+      }
 
-        if (remaining <= 0) {
+      // Ekran Geçişi
+      function goToScreen(num) {
+        if (activeTimer) {
           clearInterval(activeTimer);
           activeTimer = null;
-          setTimeout(() => goToScreen(nextScreen), 400);
-        }
-      }, 1000);
-    }
-
-    // Ekran 2 Animasyonu
-    function runScreen2Sequence() {
-      const words = ["SENİ", "ÇOK", "SEVİYORUM"];
-      const phraseContainer = document.getElementById("love-phrase");
-      const heart = document.getElementById("falling-heart");
-      const aura = document.getElementById("heart-aura");
-      const controls = document.getElementById("step2-controls");
-
-      phraseContainer.innerHTML = "";
-      phraseContainer.classList.remove("complete");
-      heart.classList.remove("drop-in");
-      aura.classList.remove("active");
-      controls.classList.remove("visible");
-
-      const spans = [];
-      words.forEach((word) => {
-        const row = document.createElement("div");
-        row.className = "love-word-row";
-
-        word.split("").forEach((char) => {
-          const span = document.createElement("span");
-          span.className = "love-char";
-          span.textContent = char;
-          row.appendChild(span);
-          spans.push(span);
-        });
-
-        phraseContainer.appendChild(row);
-      });
-
-      spans.forEach((el, index) => {
-        setTimeout(() => el.classList.add("lit"), index * 140);
-      });
-
-      const totalTextDuration = spans.length * 140 + 450;
-
-      setTimeout(() => phraseContainer.classList.add("complete"), totalTextDuration);
-      setTimeout(() => {
-        heart.classList.add("drop-in");
-        aura.classList.add("active");
-      }, totalTextDuration + 250);
-      setTimeout(() => controls.classList.add("visible"), totalTextDuration + 1250);
-    }
-
-    // Fotoğrafları Çerçevelere Yerleştir (Sadece Sunucuda Olanları Göster)
-    function renderPhotosFromMap(map) {
-      document.querySelectorAll(".ornate-frame").forEach((frame) => {
-        const slot = frame.getAttribute("data-slot");
-        const wrapper = frame.querySelector(".photo-wrapper");
-        const img = frame.querySelector("img");
-        const url = map[slot];
-
-        if (url && wrapper && img) {
-          if (img.getAttribute("src") !== url) {
-            img.src = url;
-          }
-          wrapper.classList.add("has-img");
-        } else if (wrapper && img) {
-          img.removeAttribute("src");
-          wrapper.classList.remove("has-img");
-        }
-      });
-    }
-
-    // Fotoğrafı Hızlı Yükleme İçin Optimize Et (~120-200 KB)
-    function compressImageFile(file) {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onerror = () => resolve("");
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onerror = () => resolve("");
-          img.onload = () => {
-            let maxSide = 800;
-            let quality = 0.76;
-            let dataUrl = "";
-
-            for (let attempt = 0; attempt < 3; attempt++) {
-              let w = img.width;
-              let h = img.height;
-
-              if (w > maxSide || h > maxSide) {
-                if (w > h) {
-                  h = Math.round((h * maxSide) / w);
-                  w = maxSide;
-                } else {
-                  w = Math.round((w * maxSide) / h);
-                  h = maxSide;
-                }
-              }
-
-              const canvas = document.createElement("canvas");
-              canvas.width = w;
-              canvas.height = h;
-              canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-              dataUrl = canvas.toDataURL("image/jpeg", quality);
-
-              if (dataUrl.length < 280000) break;
-              maxSide = Math.round(maxSide * 0.78);
-              quality -= 0.14;
-            }
-
-            resolve(dataUrl);
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Sunucuya Yaz + Sunucudan Geri Okuyarak %100 Doğrula
-    async function saveAndVerifySlotOnServer(slotIndex, compressedDataUrl) {
-      const docRef = doc(db, COLLECTION_NAME, "slot_" + slotIndex);
-
-      await withTimeout(
-        setDoc(docRef, {
-          url: compressedDataUrl,
-          updatedAt: Date.now()
-        }),
-        12000,
-        "Sunucuya yazma zaman aşımına uğradı. İnternet bağlantınızı ve Firebase Firestore kurallarını kontrol edin."
-      );
-
-      // Sunucudan gerçekten okunabildiğini doğrula
-      const verifiedSnap = await withTimeout(
-        getDocFromServer(docRef),
-        10000,
-        "Sunucu doğrulaması zaman aşımına uğradı."
-      );
-
-      if (!verifiedSnap.exists() || !verifiedSnap.data()?.url) {
-        throw new Error("Fotoğraf sunucuda doğrulanamadı.");
-      }
-
-      photoMap[String(slotIndex)] = verifiedSnap.data().url;
-      renderPhotosFromMap(photoMap);
-    }
-
-    // Tek Bir Slotu Yükle
-    async function uploadSlotToCloud(slotIndex, file) {
-      setSlotUploading(slotIndex, true);
-      setStatus(`⏳ ${Number(slotIndex) + 1}. çerçeve sıkıştırılıp sunucuya gönderiliyor...`);
-
-      try {
-        const compressedDataUrl = await compressImageFile(file);
-        if (!compressedDataUrl) {
-          throw new Error("Fotoğraf dosyası okunamadı.");
         }
 
-        await saveAndVerifySlotOnServer(slotIndex, compressedDataUrl);
-        setStatus(`✅ Fotoğraf sunucuya kaydedildi ve doğrulandı! Diğer cihazlarda da anında görünür.`);
-      } catch (err) {
-        handleFirestoreError(err);
-      } finally {
-        setSlotUploading(slotIndex, false);
-      }
-    }
-
-    // Toplu Fotoğraf Yükleme (Sıralı ve Doğrulamalı - Son Fotoğraf Dahil Garantili)
-    async function handleBulkUpload(event) {
-      const files = Array.from(event.target.files || []).slice(0, 10);
-      event.target.value = "";
-      if (!files.length) return;
-
-      for (let i = 0; i < files.length; i++) {
-        setSlotUploading(i, true);
-        setStatus(`⏳ Yükleniyor: <strong>${i + 1} / ${files.length}</strong> (Lütfen bekleyin...)`);
+        document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+        const target = document.getElementById("screen-" + num);
+        if (target) target.classList.add("active");
 
         try {
-          const compressedDataUrl = await compressImageFile(files[i]);
-          if (!compressedDataUrl) {
-            throw new Error(`${i + 1}. fotoğraf okunamadı.`);
-          }
-          await saveAndVerifySlotOnServer(i, compressedDataUrl);
-        } catch (err) {
-          setSlotUploading(i, false);
-          handleFirestoreError(err);
-          return;
-        } finally {
-          setSlotUploading(i, false);
+          window.scrollTo(0, 0);
+        } catch (e) {}
+
+        if (num === 2) runScreen2Sequence();
+
+        if (num === 5) {
+          fetchPhotosFromServer(true);
+          startGalleryPolling();
+        } else {
+          stopGalleryPolling();
         }
       }
 
-      setStatus(`✅ ${files.length} fotoğrafın tamamı sunucuya kaydedildi ve doğrulandı! Başka cihazdan açıldığında hepsi görünecek.`);
-    }
+      // Geri Sayım Yöneticisi
+      function runCountdown({ seconds, btnId, numId, boxId, nextScreen }) {
+        const btn = document.getElementById(btnId);
+        const numEl = document.getElementById(numId);
+        const boxEl = boxId ? document.getElementById(boxId) : null;
 
-    // Fotoğrafı Sunucudan Sil
-    async function deleteSlotFromCloud(slotIndex) {
-      setSlotUploading(slotIndex, true);
-      setStatus("🗑️ Fotoğraf sunucudan siliniyor...");
-      try {
-        await withTimeout(
-          deleteDoc(doc(db, COLLECTION_NAME, "slot_" + slotIndex)),
-          10000,
-          "Silme işlemi zaman aşımına uğradı."
-        );
-        delete photoMap[String(slotIndex)];
-        renderPhotosFromMap(photoMap);
-        setStatus("✅ Fotoğraf sunucudan silindi.");
-      } catch (err) {
-        handleFirestoreError(err);
-      } finally {
-        setSlotUploading(slotIndex, false);
-      }
-    }
+        if (!btn || btn.disabled) return;
+        btn.disabled = true;
+        btn.textContent = "Sayılıyor...";
 
-    function handleFirestoreError(err) {
-      if (err && err.code === "permission-denied") {
-        setStatus(
-          "⚠️ <strong>Firebase Yazma/Okuma İzni Kapalı!</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp <strong>Publish</strong> butonuna basın.",
-          true
-        );
-      } else {
-        setStatus("⚠️ Hata: " + (err?.message || "Sunucuya bağlanılamadı."), true);
-      }
-    }
+        let remaining = seconds;
+        numEl.textContent = remaining;
 
-    function applySnapshotData(snapshot) {
-      const freshMap = {};
-      let count = 0;
+        activeTimer = setInterval(() => {
+          remaining--;
+          numEl.textContent = remaining;
 
-      snapshot.forEach((docSnap) => {
-        const id = docSnap.id;
-        if (id.startsWith("slot_")) {
-          const slotIndex = id.replace("slot_", "");
-          const data = docSnap.data();
-          if (data && data.url) {
-            freshMap[slotIndex] = data.url;
-            count++;
+          if (boxEl && boxEl.classList.contains("timer-display")) {
+            boxEl.classList.remove("tick");
+            void boxEl.offsetWidth;
+            boxEl.classList.add("tick");
           }
-        }
-      });
 
-      photoMap = freshMap;
-      renderPhotosFromMap(photoMap);
-
-      setStatus(
-        count > 0
-          ? `🟢 Sunucu Bağlı (${count}/10 fotoğraf tüm cihazlarda aktif)`
-          : "🟢 Sunucu Bağlı — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle"
-      );
-    }
-
-    // Doğrudan Google Sunucusundan En Güncel Veriyi Çek (Önbelleği Atlar)
-    async function fetchPhotosFromServer() {
-      setStatus("🔄 Sunucudan en son fotoğraflar çekiliyor...");
-      try {
-        const snapshot = await withTimeout(
-          getDocsFromServer(collection(db, COLLECTION_NAME)),
-          12000,
-          "Sunucudan fotoğraflar alınamadı (Zaman aşımı)."
-        );
-        applySnapshotData(snapshot);
-      } catch (err) {
-        handleFirestoreError(err);
+          if (remaining <= 0) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+            setTimeout(() => goToScreen(nextScreen), 400);
+          }
+        }, 1000);
       }
-    }
 
-    // Canlı Dinleyici
-    function startRealtimePhotoSync() {
-      onSnapshot(
-        collection(db, COLLECTION_NAME),
-        (snapshot) => applySnapshotData(snapshot),
-        (err) => handleFirestoreError(err)
-      );
-    }
+      // Ekran 2 Animasyonu
+      function runScreen2Sequence() {
+        const words = ["SENİ", "ÇOK", "SEVİYORUM"];
+        const phraseContainer = document.getElementById("love-phrase");
+        const heart = document.getElementById("falling-heart");
+        const aura = document.getElementById("heart-aura");
+        const controls = document.getElementById("step2-controls");
 
-    // Çerçeve Tıklama Etkileşimi
-    function bindPhotoFrames() {
-      const singleInput = document.getElementById("single-photo-input");
+        phraseContainer.innerHTML = "";
+        phraseContainer.classList.remove("complete");
+        heart.classList.remove("drop-in");
+        aura.classList.remove("active");
+        controls.classList.remove("visible");
 
-      document.querySelectorAll(".ornate-frame").forEach((frame) => {
-        frame.addEventListener("click", () => {
+        const spans = [];
+        words.forEach((word) => {
+          const row = document.createElement("div");
+          row.className = "love-word-row";
+
+          word.split("").forEach((char) => {
+            const span = document.createElement("span");
+            span.className = "love-char";
+            span.textContent = char;
+            row.appendChild(span);
+            spans.push(span);
+          });
+
+          phraseContainer.appendChild(row);
+        });
+
+        spans.forEach((el, index) => {
+          setTimeout(() => el.classList.add("lit"), index * 140);
+        });
+
+        const totalTextDuration = spans.length * 140 + 450;
+
+        setTimeout(() => phraseContainer.classList.add("complete"), totalTextDuration);
+        setTimeout(() => {
+          heart.classList.add("drop-in");
+          aura.classList.add("active");
+        }, totalTextDuration + 250);
+        setTimeout(() => controls.classList.add("visible"), totalTextDuration + 1250);
+      }
+
+      // Fotoğrafları Çerçevelere Yerleştir
+      function renderPhotosFromMap(map) {
+        document.querySelectorAll(".ornate-frame").forEach((frame) => {
           const slot = frame.getAttribute("data-slot");
-          selectedSlotForSingleUpload = slot;
+          const wrapper = frame.querySelector(".photo-wrapper");
+          const img = frame.querySelector("img");
+          const url = map[slot];
 
-          if (photoMap[slot]) {
-            document.getElementById("lightbox-img").src = photoMap[slot];
-            document.getElementById("lightbox").classList.add("open");
-          } else {
-            singleInput.click();
+          if (url && wrapper && img) {
+            if (img.getAttribute("src") !== url) {
+              img.src = url;
+            }
+            wrapper.classList.add("has-img");
+          } else if (wrapper && img) {
+            img.removeAttribute("src");
+            wrapper.classList.remove("has-img");
           }
         });
-      });
-
-      singleInput.addEventListener("change", async (e) => {
-        const file = e.target.files && e.target.files[0];
-        e.target.value = "";
-        if (!file) return;
-        await uploadSlotToCloud(selectedSlotForSingleUpload, file);
-      });
-
-      document.getElementById("btn-replace-photo").addEventListener("click", (e) => {
-        e.stopPropagation();
-        closeLightbox();
-        singleInput.click();
-      });
-
-      document.getElementById("btn-delete-photo").addEventListener("click", async (e) => {
-        e.stopPropagation();
-        closeLightbox();
-        await deleteSlotFromCloud(selectedSlotForSingleUpload);
-      });
-    }
-
-    function closeLightbox() {
-      document.getElementById("lightbox").classList.remove("open");
-    }
-
-    // Ana Ekrana Kaydedilen Uygulama Ön Plana Geldiğinde Sunucudan Çek
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
-        fetchPhotosFromServer();
       }
-    });
 
-    window.addEventListener("pageshow", () => {
-      fetchPhotosFromServer();
-    });
+      // Fotoğrafı Hızlı ve Kesintisiz Yükleme İçin Optimize Et (~90-160 KB)
+      function compressImageFile(file) {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onerror = () => resolve("");
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onerror = () => resolve("");
+            img.onload = () => {
+              let maxSide = 720;
+              let quality = 0.72;
+              let dataUrl = "";
 
-    document.getElementById("btn-start-15").addEventListener("click", () =>
-      runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
-    );
-    document.getElementById("btn-next-2").addEventListener("click", () =>
-      runCountdown({ seconds: 2, btnId: "btn-next-2", numId: "timer-num-2", boxId: "timer-box-2", nextScreen: 3 })
-    );
-    document.getElementById("btn-start-24").addEventListener("click", () =>
-      runCountdown({ seconds: 24, btnId: "btn-start-24", numId: "timer-num-3", boxId: "timer-box-3", nextScreen: 4 })
-    );
-    document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
+              for (let attempt = 0; attempt < 3; attempt++) {
+                let w = img.width;
+                let h = img.height;
 
-    document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
-    document.getElementById("btn-force-sync").addEventListener("click", fetchPhotosFromServer);
-    document.getElementById("lightbox").addEventListener("click", closeLightbox);
-    document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+                if (w > maxSide || h > maxSide) {
+                  if (w > h) {
+                    h = Math.round((h * maxSide) / w);
+                    w = maxSide;
+                  } else {
+                    w = Math.round((w * maxSide) / h);
+                    h = maxSide;
+                  }
+                }
 
-    initAmbientParticles();
-    bindPhotoFrames();
-    fetchPhotosFromServer();
-    startRealtimePhotoSync();
+                const canvas = document.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+                dataUrl = canvas.toDataURL("image/jpeg", quality);
+
+                if (dataUrl.length < 220000) break;
+                maxSide = Math.round(maxSide * 0.78);
+                quality -= 0.14;
+              }
+
+              resolve(dataUrl);
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function handleHttpError(status, bodyText) {
+        if (status === 403) {
+          setStatus(
+            "⚠️ <strong>Firebase Yazma/Okuma İzni Kapalı (403):</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp <strong>Publish</strong> butonuna basın.",
+            true
+          );
+        } else if (status === 404 && bodyText.includes("does not exist")) {
+          setStatus(
+            "⚠️ <strong>Firestore Veritabanı Oluşturulmamış:</strong> Firebase Console > Firestore Database bölümüne girip <strong>Create database</strong> butonuna basın.",
+            true
+          );
+        } else {
+          setStatus(`⚠️ Sunucu hatası (Kod: ${status}). İnternet bağlantınızı kontrol edip Yenile'ye basın.`, true);
+        }
+      }
+
+      // Sunucudan Tüm Fotoğrafları Çek (Önbellek Tamamen Devre Dışı)
+      async function fetchPhotosFromServer(showLoadingText = false) {
+        if (isUploadingNow) return;
+        if (showLoadingText) {
+          setStatus("🔄 Sunucudan en güncel fotoğraflar çekiliyor...");
+        }
+
+        try {
+          const url = `${BASE_URL}?pageSize=20&key=${API_KEY}&_ts=${Date.now()}`;
+          const res = await fetch(url, {
+            method: "GET",
+            cache: "no-store"
+          });
+
+          if (!res.ok) {
+            const errText = await res.text();
+            handleHttpError(res.status, errText);
+            return;
+          }
+
+          const data = await res.json();
+          const freshMap = {};
+          let count = 0;
+
+          if (Array.isArray(data.documents)) {
+            data.documents.forEach((docItem) => {
+              const docName = docItem.name.split("/").pop();
+              if (docName && docName.startsWith("slot_")) {
+                const slotIndex = docName.replace("slot_", "");
+                const imgUrl = docItem.fields?.url?.stringValue;
+                if (imgUrl) {
+                  freshMap[slotIndex] = imgUrl;
+                  count++;
+                }
+              }
+            });
+          }
+
+          photoMap = freshMap;
+          renderPhotosFromMap(photoMap);
+
+          setStatus(
+            count > 0
+              ? `🟢 Canlı Senkronizasyon Aktif (${count}/10 fotoğraf tüm cihazlarda görünür)`
+              : "🟢 Sunucu Bağlı — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle"
+          );
+        } catch (err) {
+          setStatus("⚠️ İnternet bağlantısı kontrol ediliyor... Tekrar denemek için Yenile'ye basın.", true);
+        }
+      }
+
+      // Tek Bir Slotu Sunucuya Yaz (PATCH)
+      async function saveSlotToServer(slotIndex, compressedDataUrl) {
+        const docUrl = `${BASE_URL}/slot_${slotIndex}?key=${API_KEY}`;
+        const res = await fetch(docUrl, {
+          method: "PATCH",
+          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fields: {
+              url: { stringValue: compressedDataUrl },
+              updatedAt: { integerValue: String(Date.now()) }
+            }
+          })
+        });
+
+        if (!res.ok) {
+          const errText = await res.text();
+          handleHttpError(res.status, errText);
+          throw new Error("HTTP_" + res.status);
+        }
+
+        photoMap[String(slotIndex)] = compressedDataUrl;
+        renderPhotosFromMap(photoMap);
+      }
+
+      // Tek Fotoğraf Yükleme
+      async function uploadSlotToCloud(slotIndex, file) {
+        isUploadingNow = true;
+        setSlotUploading(slotIndex, true);
+        setStatus(`⏳ ${Number(slotIndex) + 1}. çerçeve sunucuya yükleniyor...`);
+
+        try {
+          const compressedDataUrl = await compressImageFile(file);
+          if (!compressedDataUrl) {
+            setStatus("❌ Fotoğraf dosyası okunamadı.", true);
+            return;
+          }
+
+          await saveSlotToServer(slotIndex, compressedDataUrl);
+          setStatus("✅ Fotoğraf sunucuya kaydedildi! Diğer cihazlarda da otomatik görünecek.");
+        } catch (e) {
+          // Hata mesajı handleHttpError içinde gösterildi
+        } finally {
+          setSlotUploading(slotIndex, false);
+          isUploadingNow = false;
+        }
+      }
+
+      // Toplu Fotoğraf Yükleme (Sıralı)
+      async function handleBulkUpload(event) {
+        const files = Array.from(event.target.files || []).slice(0, 10);
+        event.target.value = "";
+        if (!files.length) return;
+
+        isUploadingNow = true;
+        try {
+          for (let i = 0; i < files.length; i++) {
+            setSlotUploading(i, true);
+            setStatus(`⏳ Yükleniyor: <strong>${i + 1} / ${files.length}</strong> (Lütfen sayfayı kapatmayın...)`);
+
+            const compressedDataUrl = await compressImageFile(files[i]);
+            if (!compressedDataUrl) continue;
+
+            await saveSlotToServer(i, compressedDataUrl);
+            setSlotUploading(i, false);
+          }
+
+          setStatus(`✅ ${files.length} fotoğrafın tamamı sunucuya yüklendi! Diğer cihazlarda hemen görünecek.`);
+        } catch (e) {
+          // Hata mesajı handleHttpError içinde gösterildi
+        } finally {
+          for (let j = 0; j < 10; j++) setSlotUploading(j, false);
+          isUploadingNow = false;
+        }
+      }
+
+      // Fotoğrafı Sunucudan Sil
+      async function deleteSlotFromCloud(slotIndex) {
+        isUploadingNow = true;
+        setSlotUploading(slotIndex, true);
+        setStatus("🗑️ Fotoğraf sunucudan siliniyor...");
+
+        try {
+          const docUrl = `${BASE_URL}/slot_${slotIndex}?key=${API_KEY}`;
+          const res = await fetch(docUrl, {
+            method: "DELETE",
+            cache: "no-store"
+          });
+
+          if (!res.ok && res.status !== 404) {
+            const errText = await res.text();
+            handleHttpError(res.status, errText);
+            return;
+          }
+
+          delete photoMap[String(slotIndex)];
+          renderPhotosFromMap(photoMap);
+          setStatus("✅ Fotoğraf tüm cihazlardan silindi.");
+        } catch (e) {
+          setStatus("⚠️ Silme sırasında bağlantı hatası oluştu.", true);
+        } finally {
+          setSlotUploading(slotIndex, false);
+          isUploadingNow = false;
+        }
+      }
+
+      function startGalleryPolling() {
+        stopGalleryPolling();
+        syncInterval = setInterval(() => {
+          if (document.visibilityState === "visible" && !isUploadingNow) {
+            fetchPhotosFromServer(false);
+          }
+        }, 3000);
+      }
+
+      function stopGalleryPolling() {
+        if (syncInterval) {
+          clearInterval(syncInterval);
+          syncInterval = null;
+        }
+      }
+
+      function bindPhotoFrames() {
+        const singleInput = document.getElementById("single-photo-input");
+
+        document.querySelectorAll(".ornate-frame").forEach((frame) => {
+          frame.addEventListener("click", () => {
+            const slot = frame.getAttribute("data-slot");
+            selectedSlotForSingleUpload = slot;
+
+            if (photoMap[slot]) {
+              document.getElementById("lightbox-img").src = photoMap[slot];
+              document.getElementById("lightbox").classList.add("open");
+            } else {
+              singleInput.click();
+            }
+          });
+        });
+
+        singleInput.addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          e.target.value = "";
+          if (!file) return;
+          await uploadSlotToCloud(selectedSlotForSingleUpload, file);
+        });
+
+        document.getElementById("btn-replace-photo").addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeLightbox();
+          singleInput.click();
+        });
+
+        document.getElementById("btn-delete-photo").addEventListener("click", async (e) => {
+          e.stopPropagation();
+          closeLightbox();
+          await deleteSlotFromCloud(selectedSlotForSingleUpload);
+        });
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+      }
+
+      // Uygulama Ön Plana Geldiğinde Sunucudan Çek
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          fetchPhotosFromServer(false);
+        }
+      });
+
+      window.addEventListener("focus", () => {
+        fetchPhotosFromServer(false);
+      });
+
+      document.getElementById("btn-start-15").addEventListener("click", () =>
+        runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
+      );
+      document.getElementById("btn-next-2").addEventListener("click", () =>
+        runCountdown({ seconds: 2, btnId: "btn-next-2", numId: "timer-num-2", boxId: "timer-box-2", nextScreen: 3 })
+      );
+      document.getElementById("btn-start-24").addEventListener("click", () =>
+        runCountdown({ seconds: 24, btnId: "btn-start-24", numId: "timer-num-3", boxId: "timer-box-3", nextScreen: 4 })
+      );
+      document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
+
+      document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
+      document.getElementById("btn-force-sync").addEventListener("click", () => fetchPhotosFromServer(true));
+      document.getElementById("lightbox").addEventListener("click", closeLightbox);
+      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+
+      initAmbientParticles();
+      bindPhotoFrames();
+      // Açılışta arka planda fotoğrafları önceden çek
+      fetchPhotosFromServer(false);
+    })();
   </script>
 </body>
 </html>
