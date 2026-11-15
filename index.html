@@ -276,29 +276,6 @@
       transform: none;
     }
 
-    .btn-compact {
-      padding: 11px 18px;
-      font-size: 0.88rem;
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #f59e0b 0%, var(--gold) 100%);
-      color: #1f0712;
-      box-shadow: 0 8px 24px rgba(255, 209, 102, 0.45);
-    }
-
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 117, 151, 0.45);
-      box-shadow: none;
-    }
-
-    .btn-danger {
-      background: rgba(220, 38, 38, 0.85);
-      border: 1px solid rgba(255, 150, 150, 0.4);
-      box-shadow: none;
-    }
-
     .helper-note {
       margin-top: 16px;
       font-size: 0.98rem;
@@ -342,9 +319,9 @@
       animation: charFlash 0.65s ease-in-out;
       text-shadow:
         0 0 10px #fff,
-        0 0 22px var(--primary),
-        0 0 42px var(--primary),
-        0 0 60px #ff0040;
+        0 0 22px #ff4d94,
+        0 0 42px #ff2e93,
+        0 0 60px #ff70a6;
     }
 
     .love-phrase.complete .love-char.lit {
@@ -355,7 +332,7 @@
       0% {
         opacity: 0.2;
         transform: scale(1.35);
-        color: var(--gold);
+        color: #ffb3d9;
       }
       35% {
         opacity: 1;
@@ -380,7 +357,7 @@
       }
     }
 
-    /* Parlayan Kırmızı Kalp */
+    /* Parlayan Pembe Kalp */
     .heart-stage {
       position: relative;
       height: 165px;
@@ -393,10 +370,10 @@
 
     .heart-aura {
       position: absolute;
-      width: 155px;
-      height: 155px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 23, 68, 0.7) 0%, rgba(255, 0, 55, 0.25) 45%, rgba(255, 0, 55, 0) 72%);
+      background: radial-gradient(circle, rgba(255, 77, 148, 0.75) 0%, rgba(255, 117, 181, 0.3) 45%, rgba(255, 117, 181, 0) 72%);
       opacity: 0;
       pointer-events: none;
     }
@@ -423,7 +400,9 @@
       height: 122px;
       opacity: 0;
       transform: translate3d(0, -260px, 0) scale(0.4);
-      filter: drop-shadow(0 0 18px rgba(255, 0, 45, 0.95));
+      filter:
+        drop-shadow(0 0 16px rgba(255, 77, 148, 0.95))
+        drop-shadow(0 0 32px rgba(255, 133, 192, 0.75));
       will-change: transform, opacity;
     }
 
@@ -474,14 +453,14 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255, 42, 95, 0.18);
-      border: 1px solid rgba(255, 117, 151, 0.5);
+      background: rgba(255, 77, 148, 0.18);
+      border: 1px solid rgba(255, 133, 192, 0.5);
       padding: 8px 18px;
       border-radius: 999px;
       font-size: 1rem;
       font-weight: 700;
       color: #fff;
-      box-shadow: 0 0 16px rgba(255, 42, 95, 0.3);
+      box-shadow: 0 0 16px rgba(255, 77, 148, 0.3);
     }
 
     /* Ekran 4: Tarih Mesajı Kartı */
@@ -509,9 +488,9 @@
       padding: 0 4px;
     }
 
-    /* Ekran 5: Canlı Senkronize Fotoğraf Tablosu */
+    /* Ekran 5: Fotoğraf Tablosu */
     .gallery-header {
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .gallery-title {
@@ -526,39 +505,6 @@
       color: #ffd6e0;
       font-size: 0.98rem;
       opacity: 0.92;
-    }
-
-    .sync-panel {
-      background: rgba(38, 12, 26, 0.9);
-      border: 1px solid rgba(255, 117, 151, 0.5);
-      border-radius: 20px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      max-width: 580px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-    }
-
-    .sync-status {
-      font-size: 0.9rem;
-      color: #ffe5ec;
-      line-height: 1.5;
-    }
-
-    .sync-status.error {
-      color: #ffd166;
-      font-weight: 600;
-    }
-
-    .sync-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
     }
 
     .photo-table {
@@ -583,7 +529,7 @@
         0 14px 32px rgba(0, 0, 0, 0.65),
         0 0 22px rgba(255, 42, 95, 0.3),
         inset 0 0 14px rgba(255, 209, 102, 0.14);
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
       cursor: pointer;
     }
 
@@ -593,38 +539,6 @@
         0 20px 42px rgba(0, 0, 0, 0.75),
         0 0 32px rgba(255, 42, 95, 0.6),
         inset 0 0 18px rgba(255, 209, 102, 0.25);
-    }
-
-    /* Başka cihazdan anlık güncelleme geldiğinde çerçeve parlama efekti */
-    .ornate-frame.just-synced {
-      animation: syncPulseGlow 1.1s ease-out;
-    }
-
-    @keyframes syncPulseGlow {
-      0% {
-        transform: scale(1.04);
-        border-color: var(--gold);
-        box-shadow: 0 0 38px rgba(255, 209, 102, 0.95), 0 0 55px rgba(255, 42, 95, 0.8);
-      }
-      100% {
-        transform: scale(1);
-        border-color: rgba(255, 117, 151, 0.65);
-      }
-    }
-
-    .slot-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      z-index: 3;
-      background: rgba(15, 3, 9, 0.72);
-      border: 1px solid rgba(255, 209, 102, 0.5);
-      color: var(--gold);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 999px;
-      pointer-events: none;
     }
 
     .deco-tl, .deco-tr, .deco-bl, .deco-br {
@@ -645,7 +559,7 @@
       100% { transform: scale(1.22) rotate(8deg); opacity: 1; }
     }
 
-    /* Küçük Resimlerin Tam Oturması İçin Sabit Oranlı Kapsayıcı */
+    /* Fotoğraf Kapsayıcısı */
     .photo-wrapper {
       position: relative;
       display: block;
@@ -661,40 +575,10 @@
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       color: #ff9eb5;
-      padding: 12px;
-    }
-
-    .photo-placeholder-icon {
       font-size: 2rem;
-    }
-
-    .photo-placeholder-text {
-      font-size: 0.78rem;
-      opacity: 0.85;
-    }
-
-    .photo-loading-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 3, 9, 0.85);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: var(--gold);
-      font-size: 0.82rem;
-      font-weight: 600;
-      z-index: 4;
-    }
-
-    .photo-wrapper.is-uploading .photo-loading-overlay {
-      display: flex;
     }
 
     .photo-wrapper img {
@@ -723,89 +607,28 @@
       gap: 6px;
     }
 
-    /* Tam Ekran Fotoğraf Önizleme & Yer Değiştirme Modalı */
+    /* Tam Ekran Fotoğraf Önizleme (Dokunarak Aç/Kapat) */
     #lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(5, 1, 4, 0.95);
+      background: rgba(5, 1, 4, 0.94);
       z-index: 999;
       display: none;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
       padding: 20px;
+      cursor: pointer;
     }
 
     #lightbox.open { display: flex; }
 
     #lightbox img {
       max-width: 92vw;
-      max-height: 64vh;
+      max-height: 84vh;
       object-fit: contain;
       border-radius: 18px;
       border: 2px solid #ff5c8a;
       box-shadow: 0 0 40px rgba(255, 42, 95, 0.6);
-    }
-
-    .lightbox-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .swap-picker {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      background: rgba(38, 12, 26, 0.95);
-      border: 1px solid rgba(255, 209, 102, 0.55);
-      border-radius: 18px;
-      padding: 14px 18px;
-      max-width: 420px;
-      width: 100%;
-    }
-
-    .swap-picker.open {
-      display: flex;
-    }
-
-    .swap-picker-title {
-      font-size: 0.88rem;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .swap-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      width: 100%;
-    }
-
-    .swap-slot-btn {
-      background: rgba(255, 42, 95, 0.22);
-      border: 1px solid rgba(255, 117, 151, 0.55);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 8px 4px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .swap-slot-btn:hover:not(:disabled) {
-      background: var(--primary);
-      transform: scale(1.06);
-    }
-
-    .swap-slot-btn:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
     }
 
     #lightbox-close {
@@ -962,7 +785,7 @@
     </div>
   </section>
 
-  <!-- EKRAN 2: Üstten Aşağıya SENİ ÇOK SEVİYORUM + Parlayan Kırmızı Kalp + 2 Saniye -->
+  <!-- EKRAN 2: Üstten Aşağıya SENİ ÇOK SEVİYORUM + Parlayan Pembe Kalp + 2 Saniye -->
   <section id="screen-2" class="screen">
     <div class="glass-card wide">
       <div class="love-phrase" id="love-phrase"></div>
@@ -971,13 +794,13 @@
         <div class="heart-aura" id="heart-aura"></div>
         <svg id="falling-heart" class="glowing-heart" viewBox="0 0 24 24">
           <defs>
-            <linearGradient id="redHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff1a4b" />
-              <stop offset="50%" stop-color="#e60026" />
-              <stop offset="100%" stop-color="#99001a" />
+            <linearGradient id="pinkHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffb3d9" />
+              <stop offset="45%" stop-color="#ff4d94" />
+              <stop offset="100%" stop-color="#c9186a" />
             </linearGradient>
           </defs>
-          <path fill="url(#redHeartGrad)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          <path fill="url(#pinkHeartGrad)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
         </svg>
       </div>
 
@@ -1029,27 +852,11 @@
     </div>
   </section>
 
-  <!-- EKRAN 5: Canlı Senkronize Fotoğraf Tablosu -->
+  <!-- EKRAN 5: Kayıtlı Fotoğraflarımız Tablosu -->
   <section id="screen-5" class="screen screen-gallery">
     <div class="gallery-header">
       <h2 class="gallery-title">Bizim Güzel Anılarımız</h2>
       <p class="gallery-sub">✨ 15.02.2024’ten Sonsuzluğa ❤️ Her Karesi Aşk ✨</p>
-    </div>
-
-    <div class="sync-panel" id="sync-panel">
-      <p class="sync-status" id="sync-status">
-        ⚡ Gerçek zamanlı sunucu bağlantısı kuruluyor...
-      </p>
-      <div class="sync-actions">
-        <label class="btn-love btn-compact" for="bulk-photos-input">
-          ☁️ Toplu Fotoğraf Yükle (Max 10)
-        </label>
-        <button type="button" class="btn-love btn-glass btn-compact" id="btn-force-sync">
-          🔄 Yenile
-        </button>
-        <input type="file" id="bulk-photos-input" accept="image/*" multiple style="display:none" />
-        <input type="file" id="single-photo-input" accept="image/*" style="display:none" />
-      </div>
     </div>
 
     <table class="photo-table" id="photo-table">
@@ -1060,12 +867,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#1</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Seninle Her An" />
               </div>
               <div class="frame-caption"><span>✨</span> Seninle Her An <span>❤️</span></div>
@@ -1076,12 +878,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#2</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Gülüşün Dünyam" />
               </div>
               <div class="frame-caption"><span>✨</span> Gülüşün Dünyam <span>❤️</span></div>
@@ -1095,12 +892,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#3</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="En Tatlı Hallerimiz" />
               </div>
               <div class="frame-caption"><span>✨</span> En Tatlı Hallerimiz <span>❤️</span></div>
@@ -1111,12 +903,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#4</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Sana Bakarken" />
               </div>
               <div class="frame-caption"><span>✨</span> Sana Bakarken <span>❤️</span></div>
@@ -1130,12 +917,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#5</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Siyah Beyaz Aşk" />
               </div>
               <div class="frame-caption"><span>✨</span> Siyah Beyaz Aşk <span>❤️</span></div>
@@ -1146,12 +928,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#6</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Gece Işığım" />
               </div>
               <div class="frame-caption"><span>✨</span> Gece Işığım <span>❤️</span></div>
@@ -1165,12 +942,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#7</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Çiçek Gibi Anımız" />
               </div>
               <div class="frame-caption"><span>✨</span> Çiçek Gibi Anımız <span>❤️</span></div>
@@ -1181,12 +953,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#8</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Her Işıkta Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Her Işıkta Seninle <span>❤️</span></div>
@@ -1200,12 +967,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#9</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="Kalbim Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Kalbim Seninle <span>❤️</span></div>
@@ -1216,12 +978,7 @@
               <span class="deco-tl">❤️</span><span class="deco-tr">✨</span>
               <span class="deco-bl">⭐</span><span class="deco-br">💖</span>
               <div class="photo-wrapper">
-                <span class="slot-badge">#10</span>
-                <div class="photo-placeholder">
-                  <span class="photo-placeholder-icon">💖</span>
-                  <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
-                </div>
-                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
+                <div class="photo-placeholder">💖</div>
                 <img alt="İyi Ki Benimlesin" />
               </div>
               <div class="frame-caption"><span>✨</span> İyi Ki Benimlesin <span>❤️</span></div>
@@ -1232,37 +989,19 @@
     </table>
   </section>
 
-  <!-- Fotoğraf Büyütme, Değiştirme ve Yerini Değiştirme Modalı -->
+  <!-- Fotoğraf Büyütme Modalı (Sadece Dokunarak Aç/Kapat) -->
   <div id="lightbox">
     <button type="button" id="lightbox-close">✕</button>
     <img id="lightbox-img" src="" alt="Anımız" />
-    <div class="lightbox-actions">
-      <button type="button" class="btn-love btn-gold btn-compact" id="btn-replace-photo">
-        🔄 Fotoğrafı Değiştir
-      </button>
-      <button type="button" class="btn-love btn-glass btn-compact" id="btn-toggle-swap">
-        🔀 Yerini Değiştir
-      </button>
-      <button type="button" class="btn-love btn-danger btn-compact" id="btn-delete-photo">
-        🗑️ Fotoğrafı Sil
-      </button>
-    </div>
-    <div class="swap-picker" id="swap-picker">
-      <p class="swap-picker-title">Hangi çerçeve ile yer değiştirsin?</p>
-      <div class="swap-grid" id="swap-grid"></div>
-    </div>
   </div>
 
-  <!-- Firebase Gerçek Zamanlı Firestore + Yedek REST Senkronizasyonu -->
+  <!-- Firebase Canlı Fotoğraf Okuma ve Senkronizasyon -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
     import {
       initializeFirestore,
       collection,
-      doc,
-      setDoc,
-      deleteDoc,
       onSnapshot
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
@@ -1288,51 +1027,13 @@
       }
     } catch (e) {}
 
-    // Safari, iOS ve yerel HTML dosyalarında 400 hatasını önlemek için LongPolling zorunlu
     const db = initializeFirestore(app, {
       experimentalForceLongPolling: true
     });
 
     let activeTimer = null;
-    let isUploadingNow = false;
-    let selectedSlotForSingleUpload = "0";
+    let activeLightboxSlot = null;
     let photoMap = {};
-    let isInitialSnapshot = true;
-
-    function setStatus(htmlText, isError = false) {
-      const statusEl = document.getElementById("sync-status");
-      if (!statusEl) return;
-      statusEl.innerHTML = htmlText;
-      statusEl.classList.toggle("error", isError);
-    }
-
-    function setSlotUploading(slotIndex, isUploading) {
-      const frame = document.querySelector(`.ornate-frame[data-slot="${slotIndex}"]`);
-      if (!frame) return;
-      const wrapper = frame.querySelector(".photo-wrapper");
-      if (wrapper) wrapper.classList.toggle("is-uploading", isUploading);
-    }
-
-    function clearAllUploadingOverlays() {
-      document.querySelectorAll(".photo-wrapper.is-uploading").forEach((w) => {
-        w.classList.remove("is-uploading");
-      });
-    }
-
-    function flashSlotSynced(slotIndex) {
-      const frame = document.querySelector(`.ornate-frame[data-slot="${slotIndex}"]`);
-      if (!frame) return;
-      frame.classList.remove("just-synced");
-      void frame.offsetWidth;
-      frame.classList.add("just-synced");
-    }
-
-    function withTimeout(promise, ms = 10000) {
-      return Promise.race([
-        promise,
-        new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT")), ms))
-      ]);
-    }
 
     // Arka Plan Kalp ve Yıldız Parçacıkları
     function initAmbientParticles() {
@@ -1369,7 +1070,7 @@
       } catch (e) {}
 
       if (num === 2) runScreen2Sequence();
-      if (num === 5) fetchPhotosViaRest(false);
+      if (num === 5) fetchPhotosViaRest();
     }
 
     // Geri Sayım Yöneticisi
@@ -1447,7 +1148,7 @@
       setTimeout(() => controls.classList.add("visible"), totalTextDuration + 1250);
     }
 
-    // Fotoğrafları Çerçevelere Yerleştir
+    // Kayıtlı Fotoğrafları Çerçevelere Yerleştir
     function renderPhotosFromMap(map) {
       document.querySelectorAll(".ornate-frame").forEach((frame) => {
         const slot = frame.getAttribute("data-slot");
@@ -1460,17 +1161,15 @@
             img.src = url;
           }
           wrapper.classList.add("has-img");
-          wrapper.classList.remove("is-uploading");
         } else if (wrapper && img) {
           img.removeAttribute("src");
           wrapper.classList.remove("has-img");
         }
       });
 
-      // Açık Lightbox varsa onu da canlı güncelle
       const lightbox = document.getElementById("lightbox");
-      if (lightbox && lightbox.classList.contains("open")) {
-        const activeUrl = map[selectedSlotForSingleUpload];
+      if (lightbox && lightbox.classList.contains("open") && activeLightboxSlot !== null) {
+        const activeUrl = map[activeLightboxSlot];
         if (activeUrl) {
           document.getElementById("lightbox-img").src = activeUrl;
         } else {
@@ -1479,104 +1178,17 @@
       }
     }
 
-    // Fotoğrafı Hızlı ve Kesintisiz Yükleme İçin Optimize Et (< 180 KB)
-    function compressImageFile(file) {
-      return new Promise((resolve) => {
-        const safetyTimer = setTimeout(() => resolve(""), 8000);
-        const reader = new FileReader();
-        reader.onerror = () => {
-          clearTimeout(safetyTimer);
-          resolve("");
-        };
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onerror = () => {
-            clearTimeout(safetyTimer);
-            resolve("");
-          };
-          img.onload = () => {
-            try {
-              let maxSide = 680;
-              let quality = 0.72;
-              let dataUrl = "";
-
-              for (let attempt = 0; attempt < 4; attempt++) {
-                let w = img.width;
-                let h = img.height;
-
-                if (w > maxSide || h > maxSide) {
-                  if (w > h) {
-                    h = Math.round((h * maxSide) / w);
-                    w = maxSide;
-                  } else {
-                    w = Math.round((w * maxSide) / h);
-                    h = maxSide;
-                  }
-                }
-
-                const canvas = document.createElement("canvas");
-                canvas.width = w;
-                canvas.height = h;
-                const ctx = canvas.getContext("2d");
-                ctx.fillStyle = "#14050d";
-                ctx.fillRect(0, 0, w, h);
-                ctx.drawImage(img, 0, 0, w, h);
-                dataUrl = canvas.toDataURL("image/jpeg", quality);
-
-                if (dataUrl.length < 180000) break;
-                maxSide = Math.round(maxSide * 0.76);
-                quality -= 0.14;
-              }
-
-              clearTimeout(safetyTimer);
-              resolve(dataUrl);
-            } catch (err) {
-              clearTimeout(safetyTimer);
-              resolve("");
-            }
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function handleFirebaseError(err) {
-      const code = err?.code || "";
-      const msg = String(err?.message || "");
-      if (code === "permission-denied" || msg.includes("permission") || msg.includes("403")) {
-        setStatus(
-          "⚠️ <strong>Firebase Yazma/Okuma İzni Kapalı:</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp <strong>Publish</strong> butonuna basın.",
-          true
-        );
-      } else if (msg === "TIMEOUT") {
-        setStatus("⚠️ Yükleme zaman aşımına uğradı. İnternetinizi kontrol edip tekrar deneyin.", true);
-      } else {
-        setStatus("⚠️ Bağlantı yenileniyor... Lütfen birkaç saniye bekleyin veya Yenile'ye basın.", true);
-      }
-    }
-
-    // Doğrudan Temiz REST API Yedek Okuma (Hatasız Parametrelerle)
-    async function fetchPhotosViaRest(showLoadingText = false) {
-      if (isUploadingNow) return;
-      if (showLoadingText) {
-        setStatus("🔄 Sunucudan en güncel fotoğraflar çekiliyor...");
-      }
-
+    // REST API Yedek Okuma
+    async function fetchPhotosViaRest() {
       try {
-        const res = await withTimeout(
-          fetch(`${REST_BASE_URL}?pageSize=20&key=${API_KEY}`, {
-            method: "GET",
-            cache: "no-store"
-          }),
-          8000
-        );
-
+        const res = await fetch(`${REST_BASE_URL}?pageSize=20&key=${API_KEY}`, {
+          method: "GET",
+          cache: "no-store"
+        });
         if (!res.ok) return;
 
         const data = await res.json();
         const freshMap = {};
-        let count = 0;
 
         if (Array.isArray(data.documents)) {
           data.documents.forEach((docItem) => {
@@ -1586,7 +1198,6 @@
               const imgUrl = docItem.fields?.url?.stringValue;
               if (imgUrl) {
                 freshMap[slotIndex] = imgUrl;
-                count++;
               }
             }
           });
@@ -1594,18 +1205,10 @@
 
         photoMap = freshMap;
         renderPhotosFromMap(photoMap);
-
-        if (!isUploadingNow) {
-          setStatus(
-            count > 0
-              ? `🟢 Canlı Bağlantı Aktif (${count}/10 fotoğraf — Tüm cihazlarda anlık senkronize)`
-              : "🟢 Canlı Bağlantı Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle"
-          );
-        }
       } catch (e) {}
     }
 
-    // GERÇEK ZAMANLI CANLI DİNLEYİCİ (Tüm cihazlar arası anlık senkronizasyon)
+    // Canlı Veritabanı Dinleyicisi
     function startRealtimeSync() {
       const photosCol = collection(db, COLLECTION_NAME);
 
@@ -1613,8 +1216,6 @@
         photosCol,
         (snapshot) => {
           const freshMap = {};
-          let count = 0;
-
           snapshot.forEach((docSnap) => {
             const docName = docSnap.id;
             if (docName && docName.startsWith("slot_")) {
@@ -1622,259 +1223,39 @@
               const imgUrl = docSnap.data()?.url;
               if (imgUrl) {
                 freshMap[slotIndex] = imgUrl;
-                count++;
               }
             }
           });
 
           photoMap = freshMap;
           renderPhotosFromMap(photoMap);
-
-          if (!isInitialSnapshot) {
-            snapshot.docChanges().forEach((change) => {
-              if (change.doc.id.startsWith("slot_")) {
-                const changedSlot = change.doc.id.replace("slot_", "");
-                flashSlotSynced(changedSlot);
-              }
-            });
-          }
-          isInitialSnapshot = false;
-
-          if (!isUploadingNow) {
-            setStatus(
-              count > 0
-                ? `🟢 Canlı Bağlantı Aktif (${count}/10 fotoğraf — Tüm cihazlarda anlık senkronize)`
-                : "🟢 Canlı Bağlantı Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle"
-            );
-          }
         },
-        (error) => {
-          handleFirebaseError(error);
-        }
+        () => {}
       );
     }
 
-    // Tek Bir Slotu Sunucuya Yaz (SDK + REST Yedekli, Asla Takılmaz)
-    async function saveSlotToServer(slotIndex, compressedDataUrl) {
-      const slotRef = doc(db, COLLECTION_NAME, `slot_${slotIndex}`);
-      const payload = {
-        url: compressedDataUrl,
-        updatedAt: Date.now()
-      };
-
-      try {
-        await withTimeout(setDoc(slotRef, payload), 9000);
-      } catch (sdkErr) {
-        // SDK gecikirse doğrudan REST PATCH ile yaz
-        const res = await withTimeout(
-          fetch(`${REST_BASE_URL}/slot_${slotIndex}?key=${API_KEY}`, {
-            method: "PATCH",
-            cache: "no-store",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              fields: {
-                url: { stringValue: compressedDataUrl },
-                updatedAt: { integerValue: String(payload.updatedAt) }
-              }
-            })
-          }),
-          9000
-        );
-        if (!res.ok) throw new Error("HTTP_" + res.status);
-      }
-
-      photoMap[String(slotIndex)] = compressedDataUrl;
-      renderPhotosFromMap(photoMap);
-    }
-
-    // Tek Fotoğraf Yükleme
-    async function uploadSlotToCloud(slotIndex, file) {
-      isUploadingNow = true;
-      setSlotUploading(slotIndex, true);
-      setStatus(`⏳ ${Number(slotIndex) + 1}. çerçeve kaydediliyor...`);
-
-      try {
-        const compressedDataUrl = await compressImageFile(file);
-        if (!compressedDataUrl) {
-          setStatus("❌ Fotoğraf işlenemedi, lütfen başka bir görsel seçin.", true);
-          return;
-        }
-
-        await saveSlotToServer(slotIndex, compressedDataUrl);
-        flashSlotSynced(slotIndex);
-        setStatus(`✅ ${Number(slotIndex) + 1}. çerçeve kaydedildi ve tüm cihazlara anında gönderildi!`);
-      } catch (e) {
-        handleFirebaseError(e);
-      } finally {
-        setSlotUploading(slotIndex, false);
-        clearAllUploadingOverlays();
-        isUploadingNow = false;
-      }
-    }
-
-    // Toplu Fotoğraf Yükleme
-    async function handleBulkUpload(event) {
-      const files = Array.from(event.target.files || []).slice(0, 10);
-      event.target.value = "";
-      if (!files.length) return;
-
-      isUploadingNow = true;
-      try {
-        for (let i = 0; i < files.length; i++) {
-          setSlotUploading(i, true);
-          setStatus(`⏳ Yükleniyor: <strong>${i + 1} / ${files.length}</strong> (Diğer cihazlarda anında görünüyor...)`);
-
-          const compressedDataUrl = await compressImageFile(files[i]);
-          if (compressedDataUrl) {
-            await saveSlotToServer(i, compressedDataUrl);
-            flashSlotSynced(i);
-          }
-          setSlotUploading(i, false);
-        }
-
-        setStatus(`✅ ${files.length} fotoğrafın tamamı tüm cihazlara anlık olarak aktarıldı!`);
-      } catch (e) {
-        handleFirebaseError(e);
-      } finally {
-        clearAllUploadingOverlays();
-        isUploadingNow = false;
-      }
-    }
-
-    // İki Çerçevenin Yerini Değiştir (Anlık Takas)
-    async function swapSlotsInCloud(slotA, slotB) {
-      if (slotA === slotB) return;
-
-      isUploadingNow = true;
-      setSlotUploading(slotA, true);
-      setSlotUploading(slotB, true);
-      setStatus(`🔀 #${Number(slotA) + 1} ve #${Number(slotB) + 1} yer değiştiriliyor...`);
-
-      try {
-        const urlA = photoMap[String(slotA)] || null;
-        const urlB = photoMap[String(slotB)] || null;
-
-        const opA = urlB
-          ? saveSlotToServer(slotA, urlB)
-          : withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotA}`)), 8000);
-
-        const opB = urlA
-          ? saveSlotToServer(slotB, urlA)
-          : withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotB}`)), 8000);
-
-        await Promise.all([opA, opB]);
-
-        if (urlB) photoMap[String(slotA)] = urlB;
-        else delete photoMap[String(slotA)];
-
-        if (urlA) photoMap[String(slotB)] = urlA;
-        else delete photoMap[String(slotB)];
-
-        renderPhotosFromMap(photoMap);
-        flashSlotSynced(slotA);
-        flashSlotSynced(slotB);
-        setStatus(`✅ #${Number(slotA) + 1} ve #${Number(slotB) + 1} yer değiştirdi — tüm cihazlarda güncellendi!`);
-      } catch (e) {
-        handleFirebaseError(e);
-      } finally {
-        clearAllUploadingOverlays();
-        isUploadingNow = false;
-      }
-    }
-
-    // Fotoğrafı Sunucudan Sil
-    async function deleteSlotFromCloud(slotIndex) {
-      isUploadingNow = true;
-      setSlotUploading(slotIndex, true);
-      setStatus("🗑️ Fotoğraf siliniyor...");
-
-      try {
-        await withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotIndex}`)), 8000);
-        delete photoMap[String(slotIndex)];
-        renderPhotosFromMap(photoMap);
-        setStatus("✅ Fotoğraf tüm cihazlardan anında silindi.");
-      } catch (e) {
-        handleFirebaseError(e);
-      } finally {
-        clearAllUploadingOverlays();
-        isUploadingNow = false;
-      }
-    }
-
-    function renderSwapPicker(currentSlot) {
-      const grid = document.getElementById("swap-grid");
-      grid.innerHTML = "";
-
-      for (let i = 0; i < 10; i++) {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "swap-slot-btn";
-        btn.textContent = `#${i + 1}`;
-        if (String(i) === String(currentSlot)) {
-          btn.disabled = true;
-        }
-        btn.addEventListener("click", async (e) => {
-          e.stopPropagation();
-          closeLightbox();
-          await swapSlotsInCloud(String(currentSlot), String(i));
-        });
-        grid.appendChild(btn);
-      }
-    }
-
+    // Fotoğrafa Dokununca Aç / Kapat
     function bindPhotoFrames() {
-      const singleInput = document.getElementById("single-photo-input");
-
       document.querySelectorAll(".ornate-frame").forEach((frame) => {
         frame.addEventListener("click", () => {
           const slot = frame.getAttribute("data-slot");
-          selectedSlotForSingleUpload = slot;
-
           if (photoMap[slot]) {
-            document.getElementById("swap-picker").classList.remove("open");
+            activeLightboxSlot = slot;
             document.getElementById("lightbox-img").src = photoMap[slot];
             document.getElementById("lightbox").classList.add("open");
-          } else {
-            singleInput.click();
           }
         });
-      });
-
-      singleInput.addEventListener("change", async (e) => {
-        const file = e.target.files && e.target.files[0];
-        e.target.value = "";
-        if (!file) return;
-        await uploadSlotToCloud(selectedSlotForSingleUpload, file);
-      });
-
-      document.getElementById("btn-replace-photo").addEventListener("click", (e) => {
-        e.stopPropagation();
-        closeLightbox();
-        singleInput.click();
-      });
-
-      document.getElementById("btn-toggle-swap").addEventListener("click", (e) => {
-        e.stopPropagation();
-        const picker = document.getElementById("swap-picker");
-        renderSwapPicker(selectedSlotForSingleUpload);
-        picker.classList.toggle("open");
-      });
-
-      document.getElementById("btn-delete-photo").addEventListener("click", async (e) => {
-        e.stopPropagation();
-        closeLightbox();
-        await deleteSlotFromCloud(selectedSlotForSingleUpload);
       });
     }
 
     function closeLightbox() {
-      document.getElementById("swap-picker").classList.remove("open");
+      activeLightboxSlot = null;
       document.getElementById("lightbox").classList.remove("open");
     }
 
     document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible" && !isUploadingNow) {
-        fetchPhotosViaRest(false);
+      if (document.visibilityState === "visible") {
+        fetchPhotosViaRest();
       }
     });
 
@@ -1889,16 +1270,13 @@
     );
     document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
 
-    document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
-    document.getElementById("btn-force-sync").addEventListener("click", () => fetchPhotosViaRest(true));
     document.getElementById("lightbox").addEventListener("click", closeLightbox);
     document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
-    document.getElementById("swap-picker").addEventListener("click", (e) => e.stopPropagation());
 
     initAmbientParticles();
     bindPhotoFrames();
     startRealtimeSync();
-    fetchPhotosViaRest(false);
+    fetchPhotosViaRest();
   </script>
 </body>
 </html>
