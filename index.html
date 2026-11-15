@@ -21,6 +21,8 @@
       --primary: #ff2a5f;
       --primary-light: #ff7597;
       --gold: #ffd166;
+      --purple-glow: #c77dff;
+      --pink-glow: #ff70a6;
       --text-main: #fff5f7;
     }
 
@@ -152,11 +154,11 @@
       letter-spacing: 0.3px;
     }
 
-    /* Çelenkli Saniye Yuvarlağı */
+    /* Pembe - Beyaz - Mor - Nadir Yeşil Çelenkli Saniye Yuvarlağı */
     .timer-wreath-wrap {
       position: relative;
-      width: 214px;
-      height: 214px;
+      width: 218px;
+      height: 218px;
       margin: 0 auto 20px;
       display: flex;
       align-items: center;
@@ -170,18 +172,24 @@
       height: 100%;
       pointer-events: none;
       z-index: 3;
-      filter: drop-shadow(0 0 10px rgba(255, 209, 102, 0.45)) drop-shadow(0 0 18px rgba(255, 42, 95, 0.55));
+      filter:
+        drop-shadow(0 0 9px rgba(255, 112, 166, 0.55))
+        drop-shadow(0 0 16px rgba(157, 78, 221, 0.5));
       animation: wreathGlow 2.8s ease-in-out infinite alternate;
     }
 
     @keyframes wreathGlow {
       from {
         transform: scale(0.99);
-        filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.4)) drop-shadow(0 0 14px rgba(255, 42, 95, 0.45));
+        filter:
+          drop-shadow(0 0 8px rgba(255, 112, 166, 0.45))
+          drop-shadow(0 0 14px rgba(157, 78, 221, 0.4));
       }
       to {
         transform: scale(1.025);
-        filter: drop-shadow(0 0 14px rgba(255, 209, 102, 0.75)) drop-shadow(0 0 24px rgba(255, 42, 95, 0.75));
+        filter:
+          drop-shadow(0 0 14px rgba(255, 255, 255, 0.65))
+          drop-shadow(0 0 22px rgba(199, 125, 255, 0.75));
       }
     }
 
@@ -192,11 +200,12 @@
       height: 120px;
       margin: 0;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 42, 95, 0.28) 0%, rgba(20, 6, 14, 0.94) 76%);
-      border: 2.5px solid var(--gold);
+      background: radial-gradient(circle, rgba(199, 125, 255, 0.24) 0%, rgba(255, 77, 141, 0.2) 48%, rgba(20, 6, 14, 0.95) 78%);
+      border: 2.5px solid #f3d5ff;
       box-shadow:
-        0 0 24px rgba(255, 42, 95, 0.55),
-        inset 0 0 18px rgba(255, 209, 102, 0.25);
+        0 0 22px rgba(255, 112, 166, 0.55),
+        0 0 32px rgba(157, 78, 221, 0.4),
+        inset 0 0 18px rgba(255, 255, 255, 0.22);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -213,14 +222,16 @@
       font-weight: 800;
       color: #ffffff;
       line-height: 1;
-      text-shadow: 0 0 14px rgba(255, 77, 121, 0.9);
+      text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.85),
+        0 0 20px rgba(255, 77, 141, 0.9);
     }
 
     .timer-unit {
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--gold);
+      color: #f3c4fb;
       margin-top: 4px;
       font-weight: 600;
     }
@@ -498,7 +509,7 @@
       padding: 0 4px;
     }
 
-    /* Ekran 5: Bulut Senkronizasyon & Fotoğraf Tablosu */
+    /* Ekran 5: Canlı Senkronize Fotoğraf Tablosu */
     .gallery-header {
       margin-bottom: 18px;
     }
@@ -826,85 +837,105 @@
   <!-- Uçuşan Kalp ve Yıldız Arka Planı -->
   <div id="ambient-bg"></div>
 
-  <!-- Paylaşılan Çelenk SVG Tanımları -->
+  <!-- Paylaşılan Pembe - Beyaz - Mor - Nadir Yeşil Çelenk SVG Tanımları -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
-      <linearGradient id="wreathGold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#fff3b0" />
-        <stop offset="50%" stop-color="#ffd166" />
-        <stop offset="100%" stop-color="#e09f3e" />
+      <!-- Pembe Gradyan -->
+      <linearGradient id="wreathPink" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffb3c6" />
+        <stop offset="50%" stop-color="#ff4d8d" />
+        <stop offset="100%" stop-color="#c9184a" />
       </linearGradient>
-      <linearGradient id="wreathRose" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ff8fab" />
-        <stop offset="50%" stop-color="#ff2a5f" />
-        <stop offset="100%" stop-color="#9e0031" />
+
+      <!-- İnci Beyazı Gradyan -->
+      <linearGradient id="wreathWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="55%" stop-color="#fff0f6" />
+        <stop offset="100%" stop-color="#e5d4ed" />
+      </linearGradient>
+
+      <!-- Mor Gradyan -->
+      <linearGradient id="wreathPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#e0aaff" />
+        <stop offset="50%" stop-color="#9d4edd" />
+        <stop offset="100%" stop-color="#5a189a" />
+      </linearGradient>
+
+      <!-- Nadir Yeşil Gradyan -->
+      <linearGradient id="wreathRareGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#95d5b2" />
+        <stop offset="55%" stop-color="#40916c" />
+        <stop offset="100%" stop-color="#1b4332" />
       </linearGradient>
 
       <g id="romantic-wreath-art">
-        <!-- Dış İnce Altın Halka -->
-        <circle cx="110" cy="110" r="82" fill="none" stroke="url(#wreathGold)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.7" />
-        <!-- Sol ve Sağ Çelenk Dalları -->
-        <path d="M 105 196 C 48 190, 22 142, 26 96 C 29 58, 56 30, 94 22" fill="none" stroke="url(#wreathGold)" stroke-width="3.2" stroke-linecap="round" />
-        <path d="M 115 196 C 172 190, 198 142, 194 96 C 191 58, 164 30, 126 22" fill="none" stroke="url(#wreathGold)" stroke-width="3.2" stroke-linecap="round" />
+        <!-- Dış İnce Beyaz-Mor Halka -->
+        <circle cx="110" cy="110" r="82" fill="none" stroke="url(#wreathWhite)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.78" />
+        <!-- Sol ve Sağ Çelenk Dalları (Pembe & Mor) -->
+        <path d="M 105 196 C 48 190, 22 142, 26 96 C 29 58, 56 30, 94 22" fill="none" stroke="url(#wreathPink)" stroke-width="3.2" stroke-linecap="round" />
+        <path d="M 115 196 C 172 190, 198 142, 194 96 C 191 58, 164 30, 126 22" fill="none" stroke="url(#wreathPurple)" stroke-width="3.2" stroke-linecap="round" />
 
-        <!-- Sol Taraf Yaprakları -->
-        <ellipse cx="78" cy="190" rx="13" ry="6" transform="rotate(-24 78 190)" fill="url(#wreathGold)" />
-        <ellipse cx="66" cy="176" rx="13" ry="6" transform="rotate(28 66 176)" fill="url(#wreathRose)" />
-        <ellipse cx="48" cy="168" rx="14" ry="6.5" transform="rotate(-46 48 168)" fill="url(#wreathGold)" />
-        <ellipse cx="42" cy="150" rx="13" ry="6" transform="rotate(12 42 150)" fill="url(#wreathRose)" />
-        <ellipse cx="28" cy="134" rx="14" ry="6.5" transform="rotate(-72 28 134)" fill="url(#wreathGold)" />
-        <ellipse cx="32" cy="114" rx="13" ry="6" transform="rotate(-12 32 114)" fill="url(#wreathRose)" />
-        <ellipse cx="24" cy="96" rx="14" ry="6.5" transform="rotate(-95 24 96)" fill="url(#wreathGold)" />
-        <ellipse cx="34" cy="78" rx="13" ry="6" transform="rotate(-38 34 78)" fill="url(#wreathRose)" />
-        <ellipse cx="36" cy="60" rx="14" ry="6.5" transform="rotate(-122 36 60)" fill="url(#wreathGold)" />
-        <ellipse cx="52" cy="48" rx="13" ry="6" transform="rotate(-62 52 48)" fill="url(#wreathRose)" />
-        <ellipse cx="64" cy="34" rx="13" ry="6" transform="rotate(-145 64 34)" fill="url(#wreathGold)" />
-        <ellipse cx="82" cy="30" rx="12" ry="5.5" transform="rotate(-82 82 30)" fill="url(#wreathRose)" />
+        <!-- Sol Taraf Yaprakları (Pembe, Beyaz, Mor ve Nadir Yeşil) -->
+        <ellipse cx="78" cy="190" rx="13" ry="6" transform="rotate(-24 78 190)" fill="url(#wreathPink)" />
+        <ellipse cx="66" cy="176" rx="13" ry="6" transform="rotate(28 66 176)" fill="url(#wreathWhite)" />
+        <ellipse cx="48" cy="168" rx="14" ry="6.5" transform="rotate(-46 48 168)" fill="url(#wreathPurple)" />
+        <!-- Nadir Yeşil Dokunuş (Sol Alt) -->
+        <ellipse cx="42" cy="150" rx="11.5" ry="5.2" transform="rotate(12 42 150)" fill="url(#wreathRareGreen)" />
+        <ellipse cx="28" cy="134" rx="14" ry="6.5" transform="rotate(-72 28 134)" fill="url(#wreathPink)" />
+        <ellipse cx="32" cy="114" rx="13" ry="6" transform="rotate(-12 32 114)" fill="url(#wreathWhite)" />
+        <ellipse cx="24" cy="96" rx="14" ry="6.5" transform="rotate(-95 24 96)" fill="url(#wreathPurple)" />
+        <ellipse cx="34" cy="78" rx="13" ry="6" transform="rotate(-38 34 78)" fill="url(#wreathPink)" />
+        <ellipse cx="36" cy="60" rx="14" ry="6.5" transform="rotate(-122 36 60)" fill="url(#wreathWhite)" />
+        <ellipse cx="52" cy="48" rx="13" ry="6" transform="rotate(-62 52 48)" fill="url(#wreathPurple)" />
+        <ellipse cx="64" cy="34" rx="13" ry="6" transform="rotate(-145 64 34)" fill="url(#wreathPink)" />
+        <ellipse cx="82" cy="30" rx="12" ry="5.5" transform="rotate(-82 82 30)" fill="url(#wreathWhite)" />
 
-        <!-- Sağ Taraf Yaprakları -->
-        <ellipse cx="142" cy="190" rx="13" ry="6" transform="rotate(24 142 190)" fill="url(#wreathGold)" />
-        <ellipse cx="154" cy="176" rx="13" ry="6" transform="rotate(-28 154 176)" fill="url(#wreathRose)" />
-        <ellipse cx="172" cy="168" rx="14" ry="6.5" transform="rotate(46 172 168)" fill="url(#wreathGold)" />
-        <ellipse cx="178" cy="150" rx="13" ry="6" transform="rotate(-12 178 150)" fill="url(#wreathRose)" />
-        <ellipse cx="192" cy="134" rx="14" ry="6.5" transform="rotate(72 192 134)" fill="url(#wreathGold)" />
-        <ellipse cx="188" cy="114" rx="13" ry="6" transform="rotate(12 188 114)" fill="url(#wreathRose)" />
-        <ellipse cx="196" cy="96" rx="14" ry="6.5" transform="rotate(95 196 96)" fill="url(#wreathGold)" />
-        <ellipse cx="186" cy="78" rx="13" ry="6" transform="rotate(38 186 78)" fill="url(#wreathRose)" />
-        <ellipse cx="184" cy="60" rx="14" ry="6.5" transform="rotate(122 184 60)" fill="url(#wreathGold)" />
-        <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathRose)" />
-        <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathGold)" />
-        <ellipse cx="138" cy="30" rx="12" ry="5.5" transform="rotate(82 138 30)" fill="url(#wreathRose)" />
+        <!-- Sağ Taraf Yaprakları (Pembe, Beyaz, Mor ve Nadir Yeşil) -->
+        <ellipse cx="142" cy="190" rx="13" ry="6" transform="rotate(24 142 190)" fill="url(#wreathPurple)" />
+        <ellipse cx="154" cy="176" rx="13" ry="6" transform="rotate(-28 154 176)" fill="url(#wreathWhite)" />
+        <ellipse cx="172" cy="168" rx="14" ry="6.5" transform="rotate(46 172 168)" fill="url(#wreathPink)" />
+        <!-- Nadir Yeşil Dokunuş (Sağ Alt) -->
+        <ellipse cx="178" cy="150" rx="11.5" ry="5.2" transform="rotate(-12 178 150)" fill="url(#wreathRareGreen)" />
+        <ellipse cx="192" cy="134" rx="14" ry="6.5" transform="rotate(72 192 134)" fill="url(#wreathPurple)" />
+        <ellipse cx="188" cy="114" rx="13" ry="6" transform="rotate(12 188 114)" fill="url(#wreathWhite)" />
+        <ellipse cx="196" cy="96" rx="14" ry="6.5" transform="rotate(95 196 96)" fill="url(#wreathPink)" />
+        <ellipse cx="186" cy="78" rx="13" ry="6" transform="rotate(38 186 78)" fill="url(#wreathPurple)" />
+        <ellipse cx="184" cy="60" rx="14" ry="6.5" transform="rotate(122 184 60)" fill="url(#wreathWhite)" />
+        <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathPink)" />
+        <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathPurple)" />
+        <ellipse cx="138" cy="30" rx="12" ry="5.5" transform="rotate(82 138 30)" fill="url(#wreathWhite)" />
 
-        <!-- Çelenk Üzerindeki Minik Güller ve Altın Tomurcuklar -->
-        <circle cx="54" cy="176" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="54" cy="176" r="2.2" fill="#ffd6e0" />
-        <circle cx="166" cy="176" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="166" cy="176" r="2.2" fill="#ffd6e0" />
+        <!-- Çelenk Üzerindeki Pembe, Mor ve Beyaz Minik Güller -->
+        <circle cx="54" cy="176" r="5.5" fill="url(#wreathPink)" />
+        <circle cx="54" cy="176" r="2.2" fill="#ffffff" />
+        <circle cx="166" cy="176" r="5.5" fill="url(#wreathPurple)" />
+        <circle cx="166" cy="176" r="2.2" fill="#ffffff" />
 
-        <circle cx="24" cy="115" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="24" cy="115" r="2.2" fill="#ffd6e0" />
-        <circle cx="196" cy="115" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="196" cy="115" r="2.2" fill="#ffd6e0" />
+        <circle cx="24" cy="115" r="5.5" fill="url(#wreathPurple)" />
+        <circle cx="24" cy="115" r="2.2" fill="#ffffff" />
+        <circle cx="196" cy="115" r="5.5" fill="url(#wreathPink)" />
+        <circle cx="196" cy="115" r="2.2" fill="#ffffff" />
 
-        <circle cx="46" cy="44" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="46" cy="44" r="2.2" fill="#ffd6e0" />
-        <circle cx="174" cy="44" r="5.5" fill="url(#wreathRose)" />
-        <circle cx="174" cy="44" r="2.2" fill="#ffd6e0" />
+        <circle cx="46" cy="44" r="5.5" fill="url(#wreathPink)" />
+        <circle cx="46" cy="44" r="2.2" fill="#ffffff" />
+        <circle cx="174" cy="44" r="5.5" fill="url(#wreathPurple)" />
+        <circle cx="174" cy="44" r="2.2" fill="#ffffff" />
 
-        <circle cx="34" cy="154" r="3.2" fill="url(#wreathGold)" />
-        <circle cx="186" cy="154" r="3.2" fill="url(#wreathGold)" />
-        <circle cx="28" cy="74" r="3.2" fill="url(#wreathGold)" />
-        <circle cx="192" cy="74" r="3.2" fill="url(#wreathGold)" />
-        <circle cx="76" cy="24" r="3.2" fill="url(#wreathGold)" />
-        <circle cx="144" cy="24" r="3.2" fill="url(#wreathGold)" />
+        <!-- İnci Beyazı ve Mor Tomurcuklar -->
+        <circle cx="34" cy="154" r="3.2" fill="url(#wreathWhite)" />
+        <circle cx="186" cy="154" r="3.2" fill="url(#wreathWhite)" />
+        <circle cx="28" cy="74" r="3.2" fill="url(#wreathWhite)" />
+        <circle cx="192" cy="74" r="3.2" fill="url(#wreathWhite)" />
+        <circle cx="76" cy="24" r="3.2" fill="url(#wreathPurple)" />
+        <circle cx="144" cy="24" r="3.2" fill="url(#wreathPink)" />
 
-        <!-- Üst Taç Yıldızı -->
-        <path d="M110 8 L113 16 L121 19 L113 22 L110 30 L107 22 L99 19 L107 16 Z" fill="url(#wreathGold)" />
+        <!-- Üst Taç Yıldızı (Beyaz & Mor) -->
+        <path d="M110 8 L113 16 L121 19 L113 22 L110 30 L107 22 L99 19 L107 16 Z" fill="url(#wreathWhite)" />
 
-        <!-- Alt Kurdele ve Kalp Tokası -->
-        <path d="M110 198 C96 212, 82 206, 92 195 C98 189, 106 194, 110 198 Z" fill="url(#wreathRose)" />
-        <path d="M110 198 C124 212, 138 206, 128 195 C122 189, 114 194, 110 198 Z" fill="url(#wreathRose)" />
-        <path d="M110 205 L103 198 C99 194, 104 188, 110 193 C116 188, 121 194, 117 198 Z" fill="url(#wreathGold)" />
+        <!-- Alt Kurdele (Pembe & Mor) ve Beyaz Kalp Tokası -->
+        <path d="M110 198 C96 212, 82 206, 92 195 C98 189, 106 194, 110 198 Z" fill="url(#wreathPink)" />
+        <path d="M110 198 C124 212, 138 206, 128 195 C122 189, 114 194, 110 198 Z" fill="url(#wreathPurple)" />
+        <path d="M110 205 L103 198 C99 194, 104 188, 110 193 C116 188, 121 194, 117 198 Z" fill="url(#wreathWhite)" />
       </g>
     </defs>
   </svg>
@@ -1013,6 +1044,9 @@
         <label class="btn-love btn-compact" for="bulk-photos-input">
           ☁️ Toplu Fotoğraf Yükle (Max 10)
         </label>
+        <button type="button" class="btn-love btn-glass btn-compact" id="btn-force-sync">
+          🔄 Yenile
+        </button>
         <input type="file" id="bulk-photos-input" accept="image/*" multiple style="display:none" />
         <input type="file" id="single-photo-input" accept="image/*" style="display:none" />
       </div>
@@ -1031,7 +1065,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Seninle Her An" />
               </div>
               <div class="frame-caption"><span>✨</span> Seninle Her An <span>❤️</span></div>
@@ -1047,7 +1081,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Gülüşün Dünyam" />
               </div>
               <div class="frame-caption"><span>✨</span> Gülüşün Dünyam <span>❤️</span></div>
@@ -1066,7 +1100,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="En Tatlı Hallerimiz" />
               </div>
               <div class="frame-caption"><span>✨</span> En Tatlı Hallerimiz <span>❤️</span></div>
@@ -1082,7 +1116,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Sana Bakarken" />
               </div>
               <div class="frame-caption"><span>✨</span> Sana Bakarken <span>❤️</span></div>
@@ -1101,7 +1135,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Siyah Beyaz Aşk" />
               </div>
               <div class="frame-caption"><span>✨</span> Siyah Beyaz Aşk <span>❤️</span></div>
@@ -1117,7 +1151,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Gece Işığım" />
               </div>
               <div class="frame-caption"><span>✨</span> Gece Işığım <span>❤️</span></div>
@@ -1136,7 +1170,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Çiçek Gibi Anımız" />
               </div>
               <div class="frame-caption"><span>✨</span> Çiçek Gibi Anımız <span>❤️</span></div>
@@ -1152,7 +1186,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Her Işıkta Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Her Işıkta Seninle <span>❤️</span></div>
@@ -1171,7 +1205,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="Kalbim Seninle" />
               </div>
               <div class="frame-caption"><span>✨</span> Kalbim Seninle <span>❤️</span></div>
@@ -1187,7 +1221,7 @@
                   <span class="photo-placeholder-icon">💖</span>
                   <span class="photo-placeholder-text">+ Fotoğraf Ekle</span>
                 </div>
-                <div class="photo-loading-overlay">⏳ Buluta Kaydediliyor...</div>
+                <div class="photo-loading-overlay">⏳ Kaydediliyor...</div>
                 <img alt="İyi Ki Benimlesin" />
               </div>
               <div class="frame-caption"><span>✨</span> İyi Ki Benimlesin <span>❤️</span></div>
@@ -1219,12 +1253,12 @@
     </div>
   </div>
 
-  <!-- Firebase Gerçek Zamanlı Firestore SDK (Anlık Canlı Senkronizasyon) -->
+  <!-- Firebase Gerçek Zamanlı Firestore + Yedek REST Senkronizasyonu -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-analytics.js";
     import {
-      getFirestore,
+      initializeFirestore,
       collection,
       doc,
       setDoc,
@@ -1232,10 +1266,15 @@
       onSnapshot
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
+    const PROJECT_ID = "askima-d585d";
+    const API_KEY = "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws";
+    const COLLECTION_NAME = "askima_photos";
+    const REST_BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_NAME}`;
+
     const firebaseConfig = {
-      apiKey: "AIzaSyCb5fQ7Sx_sv1giaVchEtY15aFWOuk1Qws",
+      apiKey: API_KEY,
       authDomain: "askima-d585d.firebaseapp.com",
-      projectId: "askima-d585d",
+      projectId: PROJECT_ID,
       storageBucket: "askima-d585d.firebasestorage.app",
       messagingSenderId: "21373219933",
       appId: "1:21373219933:web:8150366b0508e49fef49b4",
@@ -1249,8 +1288,10 @@
       }
     } catch (e) {}
 
-    const db = getFirestore(app);
-    const COLLECTION_NAME = "askima_photos";
+    // Safari, iOS ve yerel HTML dosyalarında 400 hatasını önlemek için LongPolling zorunlu
+    const db = initializeFirestore(app, {
+      experimentalForceLongPolling: true
+    });
 
     let activeTimer = null;
     let isUploadingNow = false;
@@ -1272,12 +1313,25 @@
       if (wrapper) wrapper.classList.toggle("is-uploading", isUploading);
     }
 
+    function clearAllUploadingOverlays() {
+      document.querySelectorAll(".photo-wrapper.is-uploading").forEach((w) => {
+        w.classList.remove("is-uploading");
+      });
+    }
+
     function flashSlotSynced(slotIndex) {
       const frame = document.querySelector(`.ornate-frame[data-slot="${slotIndex}"]`);
       if (!frame) return;
       frame.classList.remove("just-synced");
       void frame.offsetWidth;
       frame.classList.add("just-synced");
+    }
+
+    function withTimeout(promise, ms = 10000) {
+      return Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT")), ms))
+      ]);
     }
 
     // Arka Plan Kalp ve Yıldız Parçacıkları
@@ -1315,6 +1369,7 @@
       } catch (e) {}
 
       if (num === 2) runScreen2Sequence();
+      if (num === 5) fetchPhotosViaRest(false);
     }
 
     // Geri Sayım Yöneticisi
@@ -1405,6 +1460,7 @@
             img.src = url;
           }
           wrapper.classList.add("has-img");
+          wrapper.classList.remove("is-uploading");
         } else if (wrapper && img) {
           img.removeAttribute("src");
           wrapper.classList.remove("has-img");
@@ -1423,45 +1479,61 @@
       }
     }
 
-    // Fotoğrafı Hızlı ve Kesintisiz Yükleme İçin Optimize Et
+    // Fotoğrafı Hızlı ve Kesintisiz Yükleme İçin Optimize Et (< 180 KB)
     function compressImageFile(file) {
       return new Promise((resolve) => {
+        const safetyTimer = setTimeout(() => resolve(""), 8000);
         const reader = new FileReader();
-        reader.onerror = () => resolve("");
+        reader.onerror = () => {
+          clearTimeout(safetyTimer);
+          resolve("");
+        };
         reader.onload = (e) => {
           const img = new Image();
-          img.onerror = () => resolve("");
+          img.onerror = () => {
+            clearTimeout(safetyTimer);
+            resolve("");
+          };
           img.onload = () => {
-            let maxSide = 760;
-            let quality = 0.74;
-            let dataUrl = "";
+            try {
+              let maxSide = 680;
+              let quality = 0.72;
+              let dataUrl = "";
 
-            for (let attempt = 0; attempt < 3; attempt++) {
-              let w = img.width;
-              let h = img.height;
+              for (let attempt = 0; attempt < 4; attempt++) {
+                let w = img.width;
+                let h = img.height;
 
-              if (w > maxSide || h > maxSide) {
-                if (w > h) {
-                  h = Math.round((h * maxSide) / w);
-                  w = maxSide;
-                } else {
-                  w = Math.round((w * maxSide) / h);
-                  h = maxSide;
+                if (w > maxSide || h > maxSide) {
+                  if (w > h) {
+                    h = Math.round((h * maxSide) / w);
+                    w = maxSide;
+                  } else {
+                    w = Math.round((w * maxSide) / h);
+                    h = maxSide;
+                  }
                 }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext("2d");
+                ctx.fillStyle = "#14050d";
+                ctx.fillRect(0, 0, w, h);
+                ctx.drawImage(img, 0, 0, w, h);
+                dataUrl = canvas.toDataURL("image/jpeg", quality);
+
+                if (dataUrl.length < 180000) break;
+                maxSide = Math.round(maxSide * 0.76);
+                quality -= 0.14;
               }
 
-              const canvas = document.createElement("canvas");
-              canvas.width = w;
-              canvas.height = h;
-              canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-              dataUrl = canvas.toDataURL("image/jpeg", quality);
-
-              if (dataUrl.length < 240000) break;
-              maxSide = Math.round(maxSide * 0.78);
-              quality -= 0.14;
+              clearTimeout(safetyTimer);
+              resolve(dataUrl);
+            } catch (err) {
+              clearTimeout(safetyTimer);
+              resolve("");
             }
-
-            resolve(dataUrl);
           };
           img.src = e.target.result;
         };
@@ -1471,15 +1543,66 @@
 
     function handleFirebaseError(err) {
       const code = err?.code || "";
-      const msg = err?.message || "";
-      if (code === "permission-denied" || msg.includes("permission")) {
+      const msg = String(err?.message || "");
+      if (code === "permission-denied" || msg.includes("permission") || msg.includes("403")) {
         setStatus(
           "⚠️ <strong>Firebase Yazma/Okuma İzni Kapalı:</strong> Firebase Console > Firestore Database > Rules sekmesinden <code>allow read, write: if true;</code> yapıp <strong>Publish</strong> butonuna basın.",
           true
         );
+      } else if (msg === "TIMEOUT") {
+        setStatus("⚠️ Yükleme zaman aşımına uğradı. İnternetinizi kontrol edip tekrar deneyin.", true);
       } else {
-        setStatus("⚠️ Bağlantı kesildi, yeniden bağlanılıyor...", true);
+        setStatus("⚠️ Bağlantı yenileniyor... Lütfen birkaç saniye bekleyin veya Yenile'ye basın.", true);
       }
+    }
+
+    // Doğrudan Temiz REST API Yedek Okuma (Hatasız Parametrelerle)
+    async function fetchPhotosViaRest(showLoadingText = false) {
+      if (isUploadingNow) return;
+      if (showLoadingText) {
+        setStatus("🔄 Sunucudan en güncel fotoğraflar çekiliyor...");
+      }
+
+      try {
+        const res = await withTimeout(
+          fetch(`${REST_BASE_URL}?pageSize=20&key=${API_KEY}`, {
+            method: "GET",
+            cache: "no-store"
+          }),
+          8000
+        );
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const freshMap = {};
+        let count = 0;
+
+        if (Array.isArray(data.documents)) {
+          data.documents.forEach((docItem) => {
+            const docName = docItem.name.split("/").pop();
+            if (docName && docName.startsWith("slot_")) {
+              const slotIndex = docName.replace("slot_", "");
+              const imgUrl = docItem.fields?.url?.stringValue;
+              if (imgUrl) {
+                freshMap[slotIndex] = imgUrl;
+                count++;
+              }
+            }
+          });
+        }
+
+        photoMap = freshMap;
+        renderPhotosFromMap(photoMap);
+
+        if (!isUploadingNow) {
+          setStatus(
+            count > 0
+              ? `🟢 Canlı Bağlantı Aktif (${count}/10 fotoğraf — Tüm cihazlarda anlık senkronize)`
+              : "🟢 Canlı Bağlantı Aktif — Boş çerçevelere dokunarak veya toplu yükle ile fotoğraf ekle"
+          );
+        }
+      } catch (e) {}
     }
 
     // GERÇEK ZAMANLI CANLI DİNLEYİCİ (Tüm cihazlar arası anlık senkronizasyon)
@@ -1507,7 +1630,6 @@
           photoMap = freshMap;
           renderPhotosFromMap(photoMap);
 
-          // İlk açılıştan sonraki canlı değişikliklerde ilgili çerçeveyi parlat
           if (!isInitialSnapshot) {
             snapshot.docChanges().forEach((change) => {
               if (change.doc.id.startsWith("slot_")) {
@@ -1532,34 +1654,60 @@
       );
     }
 
-    // Tek Bir Slotu Sunucuya Yaz
+    // Tek Bir Slotu Sunucuya Yaz (SDK + REST Yedekli, Asla Takılmaz)
     async function saveSlotToServer(slotIndex, compressedDataUrl) {
       const slotRef = doc(db, COLLECTION_NAME, `slot_${slotIndex}`);
-      await setDoc(slotRef, {
+      const payload = {
         url: compressedDataUrl,
         updatedAt: Date.now()
-      });
+      };
+
+      try {
+        await withTimeout(setDoc(slotRef, payload), 9000);
+      } catch (sdkErr) {
+        // SDK gecikirse doğrudan REST PATCH ile yaz
+        const res = await withTimeout(
+          fetch(`${REST_BASE_URL}/slot_${slotIndex}?key=${API_KEY}`, {
+            method: "PATCH",
+            cache: "no-store",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              fields: {
+                url: { stringValue: compressedDataUrl },
+                updatedAt: { integerValue: String(payload.updatedAt) }
+              }
+            })
+          }),
+          9000
+        );
+        if (!res.ok) throw new Error("HTTP_" + res.status);
+      }
+
+      photoMap[String(slotIndex)] = compressedDataUrl;
+      renderPhotosFromMap(photoMap);
     }
 
     // Tek Fotoğraf Yükleme
     async function uploadSlotToCloud(slotIndex, file) {
       isUploadingNow = true;
       setSlotUploading(slotIndex, true);
-      setStatus(`⏳ ${Number(slotIndex) + 1}. çerçeve yükleniyor...`);
+      setStatus(`⏳ ${Number(slotIndex) + 1}. çerçeve kaydediliyor...`);
 
       try {
         const compressedDataUrl = await compressImageFile(file);
         if (!compressedDataUrl) {
-          setStatus("❌ Fotoğraf dosyası okunamadı.", true);
+          setStatus("❌ Fotoğraf işlenemedi, lütfen başka bir görsel seçin.", true);
           return;
         }
 
         await saveSlotToServer(slotIndex, compressedDataUrl);
+        flashSlotSynced(slotIndex);
         setStatus(`✅ ${Number(slotIndex) + 1}. çerçeve kaydedildi ve tüm cihazlara anında gönderildi!`);
       } catch (e) {
         handleFirebaseError(e);
       } finally {
         setSlotUploading(slotIndex, false);
+        clearAllUploadingOverlays();
         isUploadingNow = false;
       }
     }
@@ -1577,9 +1725,10 @@
           setStatus(`⏳ Yükleniyor: <strong>${i + 1} / ${files.length}</strong> (Diğer cihazlarda anında görünüyor...)`);
 
           const compressedDataUrl = await compressImageFile(files[i]);
-          if (!compressedDataUrl) continue;
-
-          await saveSlotToServer(i, compressedDataUrl);
+          if (compressedDataUrl) {
+            await saveSlotToServer(i, compressedDataUrl);
+            flashSlotSynced(i);
+          }
           setSlotUploading(i, false);
         }
 
@@ -1587,7 +1736,7 @@
       } catch (e) {
         handleFirebaseError(e);
       } finally {
-        for (let j = 0; j < 10; j++) setSlotUploading(j, false);
+        clearAllUploadingOverlays();
         isUploadingNow = false;
       }
     }
@@ -1605,24 +1754,30 @@
         const urlA = photoMap[String(slotA)] || null;
         const urlB = photoMap[String(slotB)] || null;
 
-        const refA = doc(db, COLLECTION_NAME, `slot_${slotA}`);
-        const refB = doc(db, COLLECTION_NAME, `slot_${slotB}`);
-
         const opA = urlB
-          ? setDoc(refA, { url: urlB, updatedAt: Date.now() })
-          : deleteDoc(refA);
+          ? saveSlotToServer(slotA, urlB)
+          : withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotA}`)), 8000);
 
         const opB = urlA
-          ? setDoc(refB, { url: urlA, updatedAt: Date.now() })
-          : deleteDoc(refB);
+          ? saveSlotToServer(slotB, urlA)
+          : withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotB}`)), 8000);
 
         await Promise.all([opA, opB]);
+
+        if (urlB) photoMap[String(slotA)] = urlB;
+        else delete photoMap[String(slotA)];
+
+        if (urlA) photoMap[String(slotB)] = urlA;
+        else delete photoMap[String(slotB)];
+
+        renderPhotosFromMap(photoMap);
+        flashSlotSynced(slotA);
+        flashSlotSynced(slotB);
         setStatus(`✅ #${Number(slotA) + 1} ve #${Number(slotB) + 1} yer değiştirdi — tüm cihazlarda güncellendi!`);
       } catch (e) {
         handleFirebaseError(e);
       } finally {
-        setSlotUploading(slotA, false);
-        setSlotUploading(slotB, false);
+        clearAllUploadingOverlays();
         isUploadingNow = false;
       }
     }
@@ -1634,12 +1789,14 @@
       setStatus("🗑️ Fotoğraf siliniyor...");
 
       try {
-        await deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotIndex}`));
+        await withTimeout(deleteDoc(doc(db, COLLECTION_NAME, `slot_${slotIndex}`)), 8000);
+        delete photoMap[String(slotIndex)];
+        renderPhotosFromMap(photoMap);
         setStatus("✅ Fotoğraf tüm cihazlardan anında silindi.");
       } catch (e) {
         handleFirebaseError(e);
       } finally {
-        setSlotUploading(slotIndex, false);
+        clearAllUploadingOverlays();
         isUploadingNow = false;
       }
     }
@@ -1715,6 +1872,12 @@
       document.getElementById("lightbox").classList.remove("open");
     }
 
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && !isUploadingNow) {
+        fetchPhotosViaRest(false);
+      }
+    });
+
     document.getElementById("btn-start-15").addEventListener("click", () =>
       runCountdown({ seconds: 15, btnId: "btn-start-15", numId: "timer-num-1", boxId: "timer-box-1", nextScreen: 2 })
     );
@@ -1727,6 +1890,7 @@
     document.getElementById("btn-to-gallery").addEventListener("click", () => goToScreen(5));
 
     document.getElementById("bulk-photos-input").addEventListener("change", handleBulkUpload);
+    document.getElementById("btn-force-sync").addEventListener("click", () => fetchPhotosViaRest(true));
     document.getElementById("lightbox").addEventListener("click", closeLightbox);
     document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
     document.getElementById("swap-picker").addEventListener("click", (e) => e.stopPropagation());
@@ -1734,6 +1898,7 @@
     initAmbientParticles();
     bindPhotoFrames();
     startRealtimeSync();
+    fetchPhotosViaRest(false);
   </script>
 </body>
 </html>
