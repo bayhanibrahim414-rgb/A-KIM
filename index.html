@@ -6,12 +6,165 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Aşkım’a ❤️" />
+  <meta name="theme-color" content="#12040b" />
   <title>Aşkım’a ❤️ 15.02.2024</title>
+
+  <!-- Ana Ekran ve Tarayıcı İkonları -->
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" />
+  <link id="favicon-icon" rel="icon" type="image/png" />
+  <link id="app-manifest" rel="manifest" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Çelenk Logosunu PNG ve Manifest Olarak Oluşturan Betik -->
+  <script>
+    (function setupWreathAppIcon() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="512" height="512">
+        <defs>
+          <radialGradient id="bgGrad" cx="50%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#2b0918"/>
+            <stop offset="60%" stop-color="#12040b"/>
+            <stop offset="100%" stop-color="#070205"/>
+          </radialGradient>
+          <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ff4d8d" stop-opacity="0.35"/>
+            <stop offset="55%" stop-color="#9d4edd" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#12040b" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="wreathPink" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffb3c6"/>
+            <stop offset="50%" stop-color="#ff4d8d"/>
+            <stop offset="100%" stop-color="#c9184a"/>
+          </linearGradient>
+          <linearGradient id="wreathWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#fff0f6"/>
+            <stop offset="100%" stop-color="#e5d4ed"/>
+          </linearGradient>
+          <linearGradient id="wreathPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e0aaff"/>
+            <stop offset="50%" stop-color="#9d4edd"/>
+            <stop offset="100%" stop-color="#5a189a"/>
+          </linearGradient>
+          <linearGradient id="wreathRareGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#95d5b2"/>
+            <stop offset="55%" stop-color="#40916c"/>
+            <stop offset="100%" stop-color="#1b4332"/>
+          </linearGradient>
+        </defs>
+        <rect width="220" height="220" fill="url(#bgGrad)"/>
+        <circle cx="110" cy="110" r="95" fill="url(#centerGlow)"/>
+        <g transform="translate(110 110) scale(0.92) translate(-110 -110)">
+          <circle cx="110" cy="110" r="82" fill="none" stroke="url(#wreathWhite)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.78"/>
+          <path d="M 105 196 C 48 190, 22 142, 26 96 C 29 58, 56 30, 94 22" fill="none" stroke="url(#wreathPink)" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M 115 196 C 172 190, 198 142, 194 96 C 191 58, 164 30, 126 22" fill="none" stroke="url(#wreathPurple)" stroke-width="3.2" stroke-linecap="round"/>
+
+          <ellipse cx="78" cy="190" rx="13" ry="6" transform="rotate(-24 78 190)" fill="url(#wreathPink)"/>
+          <ellipse cx="66" cy="176" rx="13" ry="6" transform="rotate(28 66 176)" fill="url(#wreathWhite)"/>
+          <ellipse cx="48" cy="168" rx="14" ry="6.5" transform="rotate(-46 48 168)" fill="url(#wreathPurple)"/>
+          <ellipse cx="42" cy="150" rx="11.5" ry="5.2" transform="rotate(12 42 150)" fill="url(#wreathRareGreen)"/>
+          <ellipse cx="28" cy="134" rx="14" ry="6.5" transform="rotate(-72 28 134)" fill="url(#wreathPink)"/>
+          <ellipse cx="32" cy="114" rx="13" ry="6" transform="rotate(-12 32 114)" fill="url(#wreathWhite)"/>
+          <ellipse cx="24" cy="96" rx="14" ry="6.5" transform="rotate(-95 24 96)" fill="url(#wreathPurple)"/>
+          <ellipse cx="34" cy="78" rx="13" ry="6" transform="rotate(-38 34 78)" fill="url(#wreathPink)"/>
+          <ellipse cx="36" cy="60" rx="14" ry="6.5" transform="rotate(-122 36 60)" fill="url(#wreathWhite)"/>
+          <ellipse cx="52" cy="48" rx="13" ry="6" transform="rotate(-62 52 48)" fill="url(#wreathPurple)"/>
+          <ellipse cx="64" cy="34" rx="13" ry="6" transform="rotate(-145 64 34)" fill="url(#wreathPink)"/>
+          <ellipse cx="82" cy="30" rx="12" ry="5.5" transform="rotate(-82 82 30)" fill="url(#wreathWhite)"/>
+
+          <ellipse cx="142" cy="190" rx="13" ry="6" transform="rotate(24 142 190)" fill="url(#wreathPurple)"/>
+          <ellipse cx="154" cy="176" rx="13" ry="6" transform="rotate(-28 154 176)" fill="url(#wreathWhite)"/>
+          <ellipse cx="172" cy="168" rx="14" ry="6.5" transform="rotate(46 172 168)" fill="url(#wreathPink)"/>
+          <ellipse cx="178" cy="150" rx="11.5" ry="5.2" transform="rotate(-12 178 150)" fill="url(#wreathRareGreen)"/>
+          <ellipse cx="192" cy="134" rx="14" ry="6.5" transform="rotate(72 192 134)" fill="url(#wreathPurple)"/>
+          <ellipse cx="188" cy="114" rx="13" ry="6" transform="rotate(12 188 114)" fill="url(#wreathWhite)"/>
+          <ellipse cx="196" cy="96" rx="14" ry="6.5" transform="rotate(95 196 96)" fill="url(#wreathPink)"/>
+          <ellipse cx="186" cy="78" rx="13" ry="6" transform="rotate(38 186 78)" fill="url(#wreathPurple)"/>
+          <ellipse cx="184" cy="60" rx="14" ry="6.5" transform="rotate(122 184 60)" fill="url(#wreathWhite)"/>
+          <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathPink)"/>
+          <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathPurple)"/>
+          <ellipse cx="138" cy="30" rx="12" ry="5.5" transform="rotate(82 138 30)" fill="url(#wreathWhite)"/>
+
+          <circle cx="54" cy="176" r="5.5" fill="url(#wreathPink)"/>
+          <circle cx="54" cy="176" r="2.2" fill="#ffffff"/>
+          <circle cx="166" cy="176" r="5.5" fill="url(#wreathPurple)"/>
+          <circle cx="166" cy="176" r="2.2" fill="#ffffff"/>
+
+          <circle cx="24" cy="115" r="5.5" fill="url(#wreathPurple)"/>
+          <circle cx="24" cy="115" r="2.2" fill="#ffffff"/>
+          <circle cx="196" cy="115" r="5.5" fill="url(#wreathPink)"/>
+          <circle cx="196" cy="115" r="2.2" fill="#ffffff"/>
+
+          <circle cx="46" cy="44" r="5.5" fill="url(#wreathPink)"/>
+          <circle cx="46" cy="44" r="2.2" fill="#ffffff"/>
+          <circle cx="174" cy="44" r="5.5" fill="url(#wreathPurple)"/>
+          <circle cx="174" cy="44" r="2.2" fill="#ffffff"/>
+
+          <circle cx="34" cy="154" r="3.2" fill="url(#wreathWhite)"/>
+          <circle cx="186" cy="154" r="3.2" fill="url(#wreathWhite)"/>
+          <circle cx="28" cy="74" r="3.2" fill="url(#wreathWhite)"/>
+          <circle cx="192" cy="74" r="3.2" fill="url(#wreathWhite)"/>
+          <circle cx="76" cy="24" r="3.2" fill="url(#wreathPurple)"/>
+          <circle cx="144" cy="24" r="3.2" fill="url(#wreathPink)"/>
+
+          <path d="M110 8 L113 16 L121 19 L113 22 L110 30 L107 22 L99 19 L107 16 Z" fill="url(#wreathWhite)"/>
+
+          <path d="M110 198 C96 212, 82 206, 92 195 C98 189, 106 194, 110 198 Z" fill="url(#wreathPink)"/>
+          <path d="M110 198 C124 212, 138 206, 128 195 C122 189, 114 194, 110 198 Z" fill="url(#wreathPurple)"/>
+          <path d="M110 205 L103 198 C99 194, 104 188, 110 193 C116 188, 121 194, 117 198 Z" fill="url(#wreathWhite)"/>
+        </g>
+      </svg>`;
+
+      const svgBlob = new Blob([iconSvg], { type: "image/svg+xml;charset=utf-8" });
+      const svgUrl = URL.createObjectURL(svgBlob);
+      const img = new Image();
+
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, 512, 512);
+        URL.revokeObjectURL(svgUrl);
+
+        const pngDataUrl = canvas.toDataURL("image/png");
+
+        const appleIcon = document.getElementById("apple-touch-icon");
+        if (appleIcon) appleIcon.href = pngDataUrl;
+
+        const favIcon = document.getElementById("favicon-icon");
+        if (favIcon) favIcon.href = pngDataUrl;
+
+        const manifestData = {
+          name: "Aşkım’a ❤️ 15.02.2024",
+          short_name: "Aşkım’a ❤️",
+          start_url: window.location.href,
+          display: "standalone",
+          background_color: "#12040b",
+          theme_color: "#12040b",
+          icons: [
+            {
+              src: pngDataUrl,
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "any maskable"
+            }
+          ]
+        };
+
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], {
+          type: "application/manifest+json"
+        });
+        const manifestEl = document.getElementById("app-manifest");
+        if (manifestEl) manifestEl.href = URL.createObjectURL(manifestBlob);
+      };
+
+      img.src = svgUrl;
+    })();
+  </script>
 
   <style>
     :root {
@@ -724,8 +877,8 @@
         <ellipse cx="196" cy="96" rx="14" ry="6.5" transform="rotate(95 196 96)" fill="url(#wreathPink)" />
         <ellipse cx="186" cy="78" rx="13" ry="6" transform="rotate(38 186 78)" fill="url(#wreathPurple)" />
         <ellipse cx="184" cy="60" rx="14" ry="6.5" transform="rotate(122 184 60)" fill="url(#wreathWhite)" />
-        <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathPink)" />
-        <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathPurple)" />
+        <ellipse cx="168" cy="48" rx="13" ry="6" transform="rotate(62 168 48)" fill="url(#wreathPink)"/>
+        <ellipse cx="156" cy="34" rx="13" ry="6" transform="rotate(145 156 34)" fill="url(#wreathPurple)"/>
         <ellipse cx="138" cy="30" rx="12" ry="5.5" transform="rotate(82 138 30)" fill="url(#wreathWhite)" />
 
         <!-- Çelenk Üzerindeki Pembe, Mor ve Beyaz Minik Güller -->
